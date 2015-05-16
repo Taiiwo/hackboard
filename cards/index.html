@@ -12,6 +12,7 @@
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/freewall.js"></script>
+    <script type="text/javascript" src="../js/pluginLoader.js"></script>
     <script type="text/javascript" src="../js/materialize.min.js"></script>
     <nav>
       <div class="nav-wrapper red lighten-1">
@@ -27,85 +28,24 @@
         </ul>
       </div>
     </nav>
-    <div id="deck">
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title grey-text text-darken-4">Card Title</span>
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-          <a href='#'>This is a link</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title grey-text text-darken-4">Card Title</span>
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-          <a href='#'>This is a link</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title grey-text text-darken-4">Card Title</span>
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title grey-text text-darken-4">Card Title</span>
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title grey-text text-darken-4">Card Title</span>
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-          <a href='#'>This is a link</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title grey-text text-darken-4">Card Title</span>
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-          <a href='#'>This is a link</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-content">
-          <span class="card-title grey-text text-darken-4">Card Title</span>
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
-        </div>
-      </div>
-    </div>
+    <div id="deck"></div>
     <script>
-      var wall = new freewall("#deck");
-      wall.reset({
+      var plugins = new PluginLoader('#deck', function(){
+        deck.fitWidth();
+      });
+      plugins.load("../pluginIndex.json");
+
+      var deck = new freewall("#deck");
+      deck.reset({
         selector: '.card',
         animate: true,
         cellW: 290,
         cellH: 'auto',
         onResize: function() {
-          wall.fitWidth();
+          deck.fitWidth();
         }
       });
-      wall.fitWidth();
+      deck.fitWidth();
     </script>
   </body>
 </html>
