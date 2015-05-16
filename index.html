@@ -4,10 +4,21 @@
     <title>Dshbrd</title>
     <link type="text/css" rel="stylesheet" href="css/style.css"/>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="components/components.html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
   </head>
 
   <body>
-    <a href="/cards/">Click me!</a>
+  	<video autoplay loop id="home-background">
+  		<source src="video/background.webm" type="video/webm">
+  		<source src="video/background.mp4" type="video/mp4">
+  	</video>
+    <div id="homepage">
+      <div id="home-content">
+        <h1>HackPanel</h1>
+        <paper-button raised class="click-me">Click me!</paper-button>
+      </div>
+    </div>
   </body>
 </html>
