@@ -1,0 +1,9 @@
+.card {
+  width: 290px;
+}
+#deck {
+  position: relative;
+  top: 30px;
+  width: 900px;
+  margin: auto;
+}
