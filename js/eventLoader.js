@@ -1,4 +1,3 @@
-var eventData;
 function EventLoader(){
   this.search = function(term, callback){
     $.getJSON(
@@ -8,7 +7,6 @@ function EventLoader(){
         token: "R5KWMVH7GMWKCTBS6CQH"
       },
       function(data, status){
-        eventData = data;
         callback(data, status);
       }
     );
