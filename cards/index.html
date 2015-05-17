@@ -33,7 +33,8 @@
       var eb = new EventLoader;
       // plugins should reference this to get event information
       var selectedEvent;
-      eb.search("hyperlocal nottingham", function(data, status){
+      eb.search("hyperlocal nottingham")
+      $(document).on('eventChanged', function(e, data, status){
         // data.events is all the events that match the search.
         // do stuff here like searchbar drop-down suggestions
         selectedEvent = data.events[0];
