@@ -1,28 +1,16 @@
 <link rel="import" href="../../components/components.html">
 
-
 <dom-module id="map-plugin">
+
   <style>
-    h1 {
-      font-family: 'Roboto';
-      font-size: 22pt;
-      text-align: center;
-      padding-top: 20px;
-      font-weight: 200;
-    }
-    h3 {
-      font-family: 'Roboto';
-      font-size: 17pt;
-      text-align: center;
-      padding-top: 20px;
-      font-weight: 200;
+    #map-canvas {
+      height: 100%;
     }
   </style>
 
   <template>
     <template-plugin>
-      <h1 id="title"></h1>
-      <h3 id="location"></h3>
+      <div id="map-canvas"></div>
     </template-plugin>
   </template>
 </dom-module>
@@ -34,11 +22,17 @@
       $(document).on('eventChanged', function(e, data, status){
         // data.events is all the events that match the search.
         // do stuff here like searchbar drop-down suggestions
-        $('#location').text(
-          selectedEvent.venue.latitude +
-          '  | ' +
-          selectedEvent.venue.longitude);
-        $('#title').text(selectedEvent.name.text)
+
+        function initialize() {
+          var mapOptions = {
+            zoom: 15,
+            center: new google.maps.LatLng(selectedEvent.venue.latitude, selectedEvent.venue.longitude)
+          };
+
+          var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        }
+
+        initialize()
       });
     }
 
