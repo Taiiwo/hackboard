@@ -1,7 +1,8 @@
-function PluginLoader(selector, successHandler){
+function PluginLoader(selector){
   // a version of this object used to call methods globally
   var self = this;
-  this.load = function(pluginFileUrl){
+  this.load = function(pluginFileUrl, successHandler){
+    this.loadSuccess = successHandler;
     $.getJSON(
       pluginFileUrl,
       {},
@@ -34,8 +35,8 @@ function PluginLoader(selector, successHandler){
     $(shadow).append(
       $('<div/>').html(plugin.html)
     );
-    if (typeof successHandler != "undefined"){
-      successHandler();
+    if (typeof this.loadSuccess != "undefined"){
+      this.loadSuccess(plugin, selector);
     }
   }
 }

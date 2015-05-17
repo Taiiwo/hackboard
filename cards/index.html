@@ -18,7 +18,8 @@
     <h1>HackBoard</h1>
     <div id="deck"></div>
     <script>
-      var plugins = new PluginLoader('#deck', function(plugin, selector){
+      var plugins = new PluginLoader('#deck');
+      plugins.load("../pluginIndex.json", function(plugin, selector){
         Polymer.import( [plugin.location], function() {
           // called when our import is fully loaded
           // including any assets like CSS.
@@ -26,8 +27,7 @@
         });
         deck.fitWidth();
       });
-      plugins.load("../pluginIndex.json");
-
+      
       var deck = new freewall("#deck");
       deck.reset({
         selector: '.card',
