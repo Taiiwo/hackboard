@@ -1,6 +1,6 @@
 [
   {
-    "name":"plugin-test",
-    "location":"../js/plugins/testPlugin.html"
+    "name":"template-plugin",
+    "location":"../js/plugins/templatePlugin.html"
   }
 ]
