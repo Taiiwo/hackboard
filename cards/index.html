@@ -2,6 +2,7 @@
 <html>
   <head>
     <link type="text/css" rel="stylesheet" href="../css/style.css"/>
+    <link type="text/css" rel="stylesheet" href="css/jquery.gridster.css"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <script src="../components/webcomponentsjs/webcomponents.min.js"></script>
@@ -17,9 +18,11 @@
 
     <paper-toolbar id="dash-header">HackBoard</paper-toolbar>
 
-    <div id="deck"></div>
+    <div id="deck">
+      <ul></ul>
+    </div>
     <script>
-      var gridster = $("#deck").gridster({
+      var gridster = $("#deck ul").gridster({
         widget_margins: [10, 10],
         max_cols: 3,
         widget_base_dimensions: [290, 290],
@@ -44,7 +47,7 @@
       var plugins = new PluginLoader('#deck');
       plugins.load("../pluginIndex.json", function(plugin, selector){
         Polymer.Base.importHref(plugin.location, function() {
-          gridster.add_widget('<'+ plugin.name +'/>', plugin.x, plugin.y);
+          gridster.add_widget('<li><'+ plugin.name +'/>');
         }, function() {
           console.log("error")
         });
