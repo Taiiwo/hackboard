@@ -12,40 +12,38 @@
   <body>
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="../js/freewall.js"></script>
+    <script type="text/javascript" src="../js/jquery.gridster.min.js"></script>
     <script type="text/javascript" src="../js/pluginLoader.js"></script>
 
     <script type="text/javascript" src="../js/eventLoader.js"></script>
     <h1>HackBoard</h1>
     <div id="deck"></div>
     <script>
+      var gridster = $("#deck").gridster({
+        widget_margins: [10, 10],
+        max_cols: 3,
+        widget_base_dimensions: [290, 290]
+      }).data('gridster');
+
+      // load events
       var eb = new EventLoader;
+      // plugins should reference this to get event information
       var selectedEvent;
       eb.search("hyperlocal nottingham", function(data, status){
+        // data.events is all the events that match the search.
+        // do stuff here like searchbar drop-down suggestions
         selectedEvent = data.events[0];
       });
 
+      // iterate through and load all the plugins in pluginIndex.json
       var plugins = new PluginLoader('#deck');
       plugins.load("../pluginIndex.json", function(plugin, selector){
         Polymer.Base.importHref(plugin.location, function() {
-          $(selector).append($('<'+ plugin.name +'/>'));
+          gridster.add_widget('<'+ plugin.name +'/>');
         }, function() {
           console.log("error")
         });
-        deck.fitWidth();
       });
-
-      var deck = new freewall("#deck");
-      deck.reset({
-        selector: '.card',
-        animate: true,
-        cellW: 290,
-        cellH: 'auto',
-        onResize: function() {
-          deck.fitWidth();
-        }
-      });
-      deck.fitWidth();
     </script>
   </body>
 </html>
