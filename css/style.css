@@ -56,11 +56,9 @@ a {
 
 .card {
   width: 290px;
+  float: left;
 }
 
-#deck {
-  position: relative;
-  top: 30px;
-  max-width: 900px;
-  margin: 0 auto;
+#deck ul li {
+  list-style: none;
 }
