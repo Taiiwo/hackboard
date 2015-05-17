@@ -13,18 +13,12 @@ function PluginLoader(selector){
     this.pluginList = pluginList;
     for (var i in pluginList){
       var plugin = pluginList[i];
-      $.ajax({
-        url: plugin.location,
-        context: self,
-        success: function(code, status){
-          plugin.html = code;
-          this.runPlugin(plugin);
-        }
-      });
+      self.runPlugin(plugin);
     }
   }
   this.runPlugin = function(plugin){
     // this is just here for flexibility.
+    /*
     if (typeof this.loadSuccess == "undefined"){
       // create a container
       $(selector).append($('<div/>')
@@ -37,8 +31,8 @@ function PluginLoader(selector){
       $(shadow).append(
         $('<div/>').html(plugin.html)
       );
-    }
-    else {
+    }*/
+    if (typeof this.loadSuccess != "undefined"){
       this.loadSuccess(plugin, selector);
     }
   }
