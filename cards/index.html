@@ -18,6 +18,12 @@
     <h1>HackBoard</h1>
     <div id="deck"></div>
     <script>
+      var eb = new EventLoader;
+      var selectedEvent;
+      eb.search("hyperlocal nottingham", function(data, status){
+        selectedEvent = data.events[0];
+      });
+
       var plugins = new PluginLoader('#deck');
       plugins.load("../pluginIndex.json", function(plugin, selector){
         Polymer.import( [plugin.location], function() {
@@ -27,7 +33,7 @@
         });
         deck.fitWidth();
       });
-      
+
       var deck = new freewall("#deck");
       deck.reset({
         selector: '.card',
