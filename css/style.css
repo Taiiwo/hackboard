@@ -50,6 +50,10 @@ a {
   z-index: -100;
 }
 
+#dash-header {
+  background-color: rgba(224, 0, 50, 1);
+}
+
 .card {
   width: 290px;
 }
@@ -58,5 +62,5 @@ a {
   position: relative;
   top: 30px;
   max-width: 900px;
-  margin: auto;
+  margin: 0 auto;
 }
