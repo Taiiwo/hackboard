@@ -1,0 +1,51 @@
+<link rel="import" href="../../components/components.html">
+
+
+<dom-module id="map-plugin">
+  <style>
+    paper-material {
+      height: 290px;
+      background-color: white;
+    }
+
+    h1 {
+      font-family: 'Roboto';
+      font-size: 22pt;
+      text-align: center;
+      padding-top: 20px;
+      font-weight: 200;
+    }
+    h3 {
+      font-family: 'Roboto';
+      font-size: 17pt;
+      text-align: center;
+      padding-top: 20px;
+      font-weight: 200;
+    }
+  </style>
+
+  <template>
+    <paper-material elevation="2">
+      <h1 id="title">Template Plugin</h1>
+      <h3 id="location"><h3>
+    </paper-material>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'map-plugin',
+    ready: function(){
+      $(document).on('eventChanged', function(e, data, status){
+        // data.events is all the events that match the search.
+        // do stuff here like searchbar drop-down suggestions
+        $('#location').text(
+          selectedEvent.venue.latitude +
+          '  | ' +
+          selectedEvent.venue.longitude);
+        $('#title').text(selectedEvent.name.text)
+      });
+    }
+
+  })
+</script>
