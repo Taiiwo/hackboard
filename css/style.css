@@ -55,8 +55,15 @@ a {
 }
 
 .card {
+  height: 290px;
+  position: absolute;
   width: 290px;
   float: left;
+  margin-top: 80px;
+}
+
+#deck ul{
+  max-width: 1000px;
 }
 
 #deck ul li {

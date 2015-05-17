@@ -2,7 +2,7 @@
 <html>
   <head>
     <link type="text/css" rel="stylesheet" href="../css/style.css"/>
-    <link type="text/css" rel="stylesheet" href="css/jquery.gridster.css"/>
+    <link type="text/css" rel="stylesheet" href="../css/jquery.gridster.css"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <script src="../components/webcomponentsjs/webcomponents.min.js"></script>
@@ -12,7 +12,8 @@
 
   <body>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="../js/jquery.gridster.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../js/shapeshift.js"></script>
     <script type="text/javascript" src="../js/pluginLoader.js"></script>
     <script type="text/javascript" src="../js/eventLoader.js"></script>
 
@@ -22,15 +23,15 @@
       <ul></ul>
     </div>
     <script>
-      var gridster = $("#deck ul").gridster({
-        widget_margins: [10, 10],
-        max_cols: 3,
-        widget_base_dimensions: [290, 290],
-        helper: 'clone',
-        resize: {
-          enabled: true
-        }
-      }).data('gridster');
+      function reloadGrid(selector){
+        var options = {
+          gutterX: 15,
+          gutterY: 15,
+          animationSpeed: 300
+        };
+
+        $(selector).shapeshift(options);
+      }
 
       // load events
       var eb = new EventLoader;
@@ -44,14 +45,22 @@
       });
 
       // iterate through and load all the plugins in pluginIndex.json
-      var plugins = new PluginLoader('#deck');
-      plugins.load("../pluginIndex.json", function(plugin, selector){
-        Polymer.Base.importHref(plugin.location, function() {
-          gridster.add_widget('<li><'+ plugin.name +'/>');
-        }, function() {
-          console.log("error")
+      var plugins = new PluginLoader('#deck ul');
+      for (var i = 0; i < 5; i++){
+        plugins.load("../pluginIndex.json", function(plugin, selector){
+          Polymer.Base.importHref(plugin.location, function() {
+            $(selector).append($('<li/>')
+              .attr('id', 'plugin-' + plugin.name)
+              .addClass('card')
+              .append(
+                $('<'+ plugin.name +'/>')
+              ));
+              setTimeout(function(){reloadGrid(selector)},50);
+          }, function() {
+            console.log("error")
+          });
         });
-      });
+      }
     </script>
   </body>
 </html>
