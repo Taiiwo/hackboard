@@ -22,7 +22,11 @@
       var gridster = $("#deck").gridster({
         widget_margins: [10, 10],
         max_cols: 3,
-        widget_base_dimensions: [290, 290]
+        widget_base_dimensions: [290, 290],
+        helper: 'clone',
+        resize: {
+          enabled: true
+        }
       }).data('gridster');
 
       // load events
