@@ -1,0 +1,34 @@
+<link rel="import" href="../../components/components.html">
+
+
+<dom-module id="logo-plugin">
+  <style>
+    #logo{
+      width: 290px;
+      height: 250px;
+      background-size: cover !important;
+      background-position-x: 50% !important;
+      background-position-y: 50% !important;
+    }
+  </style>
+
+  <template>
+    <template-plugin>
+      <div id="logo"></div>
+    </template-plugin>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'logo-plugin',
+    ready: function(){
+      $(document).on('eventChanged', function(e, data, status){
+        // data.events is all the events that match the search.
+        // do stuff here like searchbar drop-down suggestions
+        $('#logo').css('background', 'url(' + selectedEvent.logo.url + ')');
+      });
+    }
+
+  })
+</script>
