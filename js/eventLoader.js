@@ -1,5 +1,5 @@
 function EventLoader(){
-  this.search = function(term, callback){
+  this.search = function(term){
     $.getJSON(
       "https://www.eventbriteapi.com/v3/events/search/",
       {
@@ -7,7 +7,7 @@ function EventLoader(){
         token: "R5KWMVH7GMWKCTBS6CQH"
       },
       function(data, status){
-        callback(data, status);
+        $( document ).trigger("eventChanged", data, status);
       }
     );
   }
