@@ -46,21 +46,26 @@
 
       // iterate through and load all the plugins in pluginIndex.json
       var plugins = new PluginLoader('#deck ul');
-      for (var i = 0; i < 5; i++){
-        plugins.load("../pluginIndex.json", function(plugin, selector){
-          Polymer.Base.importHref(plugin.location, function() {
-            $(selector).append($('<li/>')
-              .attr('id', 'plugin-' + plugin.name)
-              .addClass('card')
-              .append(
-                $('<'+ plugin.name +'/>')
-              ));
-              setTimeout(function(){reloadGrid(selector)},50);
-          }, function() {
-            console.log("error")
-          });
+      plugins.load("../pluginIndex.json", function(plugin, selector){
+        Polymer.Base.importHref(plugin.location, function() {
+          $(selector).append($('<li/>')
+            .attr('id', 'plugin-' + plugin.name)
+            .addClass('card')
+            .append(
+              $('<'+ plugin.name +'/>')
+            ));
+            if (plugin.x > 1 || plugin.y > 1){
+              $('#plugin-' + plugin.name)
+                .animate({width: plugin.x * 290 + (plugin.x - 1) * 15}, 200)
+                .attr('data-ss-colspan', plugin.x)
+                .animate({height:40 + plugin.y}, 200)
+            }
+
+            setTimeout(function(){reloadGrid(selector)},50);
+        }, function() {
+          console.log("error")
         });
-      }
+      });
     </script>
   </body>
 </html>
