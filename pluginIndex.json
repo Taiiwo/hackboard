@@ -10,5 +10,11 @@
     "location":"../js/plugins/mapPlugin.html",
     "x": 2,
     "y": 1
+  },
+  {
+    "name":"logo-plugin",
+    "location":"../js/plugins/logoPlugin.html",
+    "x": 2,
+    "y": 1
   }
 ]

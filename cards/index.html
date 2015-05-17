@@ -25,8 +25,11 @@
     <script>
       function reloadGrid(selector){
         var options = {
+          minColumns: 2,
           gutterX: 15,
           gutterY: 15,
+          handle: "header",
+          centerWhileDragging: false,
           animationSpeed: 300
         };
 
@@ -54,14 +57,14 @@
             .append(
               $('<'+ plugin.name +'/>')
             ));
-            if (plugin.x > 1 || plugin.y > 1){
-              $('#plugin-' + plugin.name)
-                .animate({width: plugin.x * 290 + (plugin.x - 1) * 15}, 200)
-                .attr('data-ss-colspan', plugin.x)
-                .animate({height:40 + plugin.y}, 200)
-            }
 
-            setTimeout(function(){reloadGrid(selector)},50);
+            setTimeout(function(){
+              reloadGrid(selector)
+              $('#plugin-' + plugin.name)
+                .css('width', plugin.x * 290 + (plugin.x - 1) * 15)
+                .attr('data-ss-colspan', plugin.x)
+                .css('height',plugin.y * 290 + (plugin.y - 1) * 15)
+            },300);
         }, function() {
           console.log("error")
         });

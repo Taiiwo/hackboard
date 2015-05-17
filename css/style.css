@@ -58,12 +58,15 @@ a {
   height: 290px;
   position: absolute;
   width: 290px;
+  height: 290px;
   float: left;
   margin-top: 80px;
+  background-color: #fff;
 }
 
 #deck ul{
   max-width: 1000px;
+  height: 100%;
 }
 
 #deck ul li {
