@@ -1,6 +1,6 @@
 var eventData;
 function EventLoader(){
-  this.search = function(term){
+  this.search = function(term, callback){
     $.getJSON(
       "https://www.eventbriteapi.com/v3/events/search/",
       {
@@ -9,6 +9,7 @@ function EventLoader(){
       },
       function(data, status){
         eventData = data;
+        callback(data, status);
       }
     );
   }
