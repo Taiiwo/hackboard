@@ -39,7 +39,7 @@
       var plugins = new PluginLoader('#deck');
       plugins.load("../pluginIndex.json", function(plugin, selector){
         Polymer.Base.importHref(plugin.location, function() {
-          gridster.add_widget('<'+ plugin.name +'/>');
+          gridster.add_widget('<'+ plugin.name +'/>', plugin.x, plugin.y);
         }, function() {
           console.log("error")
         });

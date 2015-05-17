@@ -1,6 +1,8 @@
 [
   {
     "name":"plugin-test",
-    "location":"../js/plugins/testPlugin.html"
+    "location":"../js/plugins/testPlugin.html",
+    "x": 1,
+    "y": 1
   }
 ]
