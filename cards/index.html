@@ -14,18 +14,26 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="../js/freewall.js"></script>
     <script type="text/javascript" src="../js/pluginLoader.js"></script>
+
+    <script type="text/javascript" src="../js/eventLoader.js"></script>
     <h1>HackBoard</h1>
     <div id="deck"></div>
     <script>
-      var plugins = new PluginLoader('#deck', function(plugin, selector){
-        Polymer.import( [plugin.location], function() {
-          // called when our import is fully loaded
-          // including any assets like CSS.
+      var eb = new EventLoader;
+      var selectedEvent;
+      eb.search("hyperlocal nottingham", function(data, status){
+        selectedEvent = data.events[0];
+      });
+
+      var plugins = new PluginLoader('#deck');
+      plugins.load("../pluginIndex.json", function(plugin, selector){
+        Polymer.Base.importHref(plugin.location, function() {
           $(selector).append($('<'+ plugin.name +'/>'));
+        }, function() {
+          console.log("error")
         });
         deck.fitWidth();
       });
-      plugins.load("../pluginIndex.json");
 
       var deck = new freewall("#deck");
       deck.reset({
