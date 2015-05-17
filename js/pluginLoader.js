@@ -24,22 +24,21 @@ function PluginLoader(selector){
     }
   }
   this.runPlugin = function(plugin){
-    /*
-    // create a container
-    $(selector).append($('<div/>')
-      .attr('id', 'plugin' + plugin.name)
-      .addClass('card')
-    );
-    // make container into a shadow DOM
-    var shadow = $(selector + ' #plugin' + plugin.name)[0].createShadowRoot();
-    // add all the things to the shadow dom.
-    $(shadow).append(
-      $('<div/>').html(plugin.html)
-    );
-
-    */
-
-    if (typeof this.loadSuccess != "undefined"){
+    // this is just here for flexibility.
+    if (typeof this.loadSuccess == "undefined"){
+      // create a container
+      $(selector).append($('<div/>')
+        .attr('id', 'plugin' + plugin.name)
+        .addClass('card')
+      );
+      // make container into a shadow DOM
+      var shadow = $(selector + ' #plugin' + plugin.name)[0].createShadowRoot();
+      // add all the things to the shadow dom.
+      $(shadow).append(
+        $('<div/>').html(plugin.html)
+      );
+    }
+    else {
       this.loadSuccess(plugin, selector);
     }
   }
