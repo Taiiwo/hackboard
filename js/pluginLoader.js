@@ -23,6 +23,7 @@ function PluginLoader(selector, successHandler){
     }
   }
   this.runPlugin = function(plugin){
+    /*
     // create a container
     $(selector).append($('<div/>')
       .attr('id', 'plugin' + plugin.name)
@@ -34,8 +35,10 @@ function PluginLoader(selector, successHandler){
     $(shadow).append(
       $('<div/>').html(plugin.html)
     );
+
+    */
     if (typeof successHandler != "undefined"){
-      successHandler();
+      successHandler(plugin, selector);
     }
   }
 }
