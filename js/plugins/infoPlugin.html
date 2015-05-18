@@ -1,0 +1,78 @@
+<link rel="import" href="../../components/components.html">
+
+<dom-module id="info-plugin">
+
+  <style>
+  h1, h2, h3, p {
+    font-family: 'Roboto';
+    text-align: center;
+    font-weight: 200;
+  }
+  h1 {
+    font-size: 20pt;
+    padding-top: 20px;
+  }
+  h2 {
+    padding-top: 5px;
+    font-size: 16pt;
+  }
+  </style>
+
+  <template>
+    <plugin-template>
+      <h1 id="title"></h1>
+      <h2 id="date"></h2>
+      <h2 id="capacity"></h2>
+      <p id="hoster"></p>
+    </plugin-template>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'info-plugin',
+    ready: function(){
+      $(document).on('eventChanged', function(e, data, status){
+        var v = selectedEvent.name.text;
+        if (v != undefined){
+          $('.info-plugin#title').text(v);
+        }
+        var v = selectedEvent.start.local;
+        if (v != undefined){
+          $('.info-plugin#date').text("Date: " + v);
+        }
+        var v = selectedEvent.capacity;
+        if (v != undefined){
+          $('.info-plugin#capacity').text("Capacity: " + v);
+        }
+        var v = selectedEvent.organizer.name;
+        if (v != undefined){
+          $('.info-plugin#hoster').text(v);
+        }
+        /*
+        var v = selectedEvent.venue.address;
+        if (v != undefined){
+          if (v.address_1 != undefined && v.address_1 != null){
+            $('.info-plugin#location').html($('.info-plugin#location').html() + v.address_1 + "<br/>");
+          }
+          if (v.address_2 != undefined && v.address_2 != null){
+            $('.info-plugin#location').html($('.info-plugin#location').html() + v.address_2 + "<br/>");
+          }
+          if (v.city != undefined && v.city != null){
+            $('.info-plugin#location').html($('.info-plugin#location').html() + v.city + "<br/>");
+          }
+          if (v.region != undefined && v.region != null){
+            $('.info-plugin#location').html($('.info-plugin#location').html() + v.region + "<br/>");
+          }
+          if (v.country != undefined && v.country != null){
+            $('.info-plugin#location').html($('.info-plugin#location').html() + v.country + "<br/>");
+          }
+          if (v.postal_code != undefined && v.postal_code != null){
+            $('.info-plugin#location').html($('.info-plugin#location').html() + selectedEvent.venue.address.postal_code + "<br/>");
+          }
+        }*/
+      });
+    }
+
+  })
+</script>

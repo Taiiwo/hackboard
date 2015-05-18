@@ -16,5 +16,11 @@
     "location":"../js/plugins/eventbritePlugin.html",
     "x": 2,
     "y": 1
+  },
+  {
+    "name":"info-plugin",
+    "location":"../js/plugins/infoPlugin.html",
+    "x": 1,
+    "y": 1
   }
 ]
