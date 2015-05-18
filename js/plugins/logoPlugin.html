@@ -3,19 +3,17 @@
 
 <dom-module id="logo-plugin">
   <style>
-    #logo{
-      width: 290px;
-      height: 250px;
-      background-size: cover !important;
-      background-position-x: 50% !important;
-      background-position-y: 50% !important;
+    #logo {
+      width: 100%;
+      height: 100%;
+      background-position: center center;
     }
   </style>
 
   <template>
-    <template-plugin>
+    <plugin-template>
       <div id="logo"></div>
-    </template-plugin>
+    </plugin-template>
   </template>
 </dom-module>
 
@@ -26,7 +24,7 @@
       $(document).on('eventChanged', function(e, data, status){
         // data.events is all the events that match the search.
         // do stuff here like searchbar drop-down suggestions
-        $('#logo').css('background', 'url(' + selectedEvent.logo.url + ')');
+        $('#logo').css('background-image', 'url("' + selectedEvent.logo.url + '")');
       });
     }
 

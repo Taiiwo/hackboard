@@ -1,11 +1,5 @@
 [
   {
-    "name":"template-plugin",
-    "location":"../js/plugins/templatePlugin.html",
-    "x": 1,
-    "y": 1
-  },
-  {
     "name":"map-plugin",
     "location":"../js/plugins/mapPlugin.html",
     "x": 2,

@@ -1,6 +1,6 @@
 <link rel="import" href="../../components/components.html">
 
-<dom-module id="template-plugin">
+<dom-module id="plugin-template">
   <style>
     paper-material {
       height: 290px;
@@ -17,12 +17,14 @@
     header {
       height: 20px;
       padding: 10px;
-      background-color: rgba(224, 0, 50, 1);
+      background-color: #03A9F4;
       color: white;
+      cursor: pointer;
     }
 
     .plugin-content {
       height: calc(100% - 40px);
+      width: 100%;
     }
   </style>
 
@@ -38,6 +40,6 @@
 
 <script>
   Polymer({
-    is: 'template-plugin'
+    is: 'plugin-template'
   })
 </script>
