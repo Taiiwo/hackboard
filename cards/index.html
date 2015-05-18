@@ -41,19 +41,14 @@
         var re = new RegExp('&'+q+'(?:=([^&]*))?(?=&|$)','i');
         return (s=s.replace(/^\?/,'&').match(re)) ? (typeof s[1] == 'undefined' ? '' : decodeURIComponent(s[1])) : undefined;
       }
+      var selector = '#deck ul';
       var selectedEvent;
-      function eventSearch(term, selector){
-        $(selector).empty();
-        // load events
-        var eb = new EventLoader;
-        // plugins should reference this to get event information
-        eb.search(term)
-        $(document).on('eventChanged', function(e, data, status){
-          // data.events is all the events that match the search.
-          // do stuff here like searchbar drop-down suggestions
-          selectedEvent = data.events[0];
-        });
-
+      var eb = new EventLoader;
+      $(document).on('eventChanged', function(e, data, status){
+        // data.events is all the events that match the search.
+        // do stuff here like searchbar drop-down suggestions
+        selectedEvent = data.events[0];
+      });
         // iterate through and load all the plugins in pluginIndex.json
         var plugins = new PluginLoader(selector);
         plugins.load("../pluginIndex.json", function(plugin, selector){
@@ -76,9 +71,8 @@
             console.log("error")
           });
         });
-      }
       var query = $_GET('q') || "hyperlocal nottingham";
-      eventSearch(query, '#deck ul');
+      eb.search(query);
     </script>
   </body>
 </html>
