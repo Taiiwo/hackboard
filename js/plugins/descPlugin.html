@@ -10,8 +10,12 @@
     font-weight: 200;
     margin: 10px;
     overflow-y: scroll;
+    overflow-x: hidden;
     height: 230px;
     text-align: left;
+  }
+  p img {
+    max-width: 270px !important;
   }
   </style>
 
@@ -27,9 +31,9 @@
     is: 'desc-plugin',
     ready: function(){
       $(document).on('eventChanged', function(e, data, status){
-        var v = selectedEvent.description.text;
+        var v = selectedEvent.description.html;
         if (v != undefined && v){
-          $('.desc-plugin#desc').text(selectedEvent.description.text);
+          $('.desc-plugin#desc').html(selectedEvent.description.html);
         }
       });
     }
