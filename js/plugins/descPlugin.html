@@ -1,0 +1,38 @@
+<link rel="import" href="../../components/components.html">
+
+<dom-module id="desc-plugin">
+
+  <style>
+  p {
+    font-family: 'Roboto';
+    text-align: center;
+    font-size: 16px;
+    font-weight: 200;
+    margin: 10px;
+    overflow-y: scroll;
+    height: 230px;
+    text-align: left;
+  }
+  </style>
+
+  <template>
+    <plugin-template>
+      <p id="desc"></p>
+    </plugin-template>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'desc-plugin',
+    ready: function(){
+      $(document).on('eventChanged', function(e, data, status){
+        var v = selectedEvent.description.text;
+        if (v != undefined && v){
+          $('.desc-plugin#desc').text(selectedEvent.description.text);
+        }
+      });
+    }
+
+  })
+</script>
