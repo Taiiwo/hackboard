@@ -1,5 +1,5 @@
-# hackboard
-It's a dashboard for hackathons, but using only browser technologies and cloud services.
+# HackBoard
+It's a dashboard for hack events, built for Cloudjam.
 
 ##### How to make a Plugin
 
@@ -34,3 +34,13 @@ It's a dashboard for hackathons, but using only browser technologies and cloud s
 </script>
 ```
 2) Add your plugin details to pluginIndex.json
+
+``` json
+,
+{
+  "name":"plugin-name",
+  "location":"../js/plugins/pluginFile.html",
+  "x": 1,
+  "y": 1
+}
+```
