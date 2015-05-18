@@ -55,6 +55,26 @@ a {
   text-align: center;
 }
 
+.search {
+  float: right;
+  display: inline;
+  color: #ffffff;
+  width: 350px;
+  text-align: left;
+}
+
+.search /deep/ ::-webkit-input-placeholder {
+  color: #ffffff;
+}
+
+.search /deep/ ::-moz-placeholder {
+  color: #ffffff;
+}
+
+.search /deep/ :-ms-input-placeholder {
+  color: #ffffff;
+}
+
 .card {
   height: 290px;
   position: absolute;
