@@ -10,5 +10,11 @@
     "location":"../js/plugins/logoPlugin.html",
     "x": 1,
     "y": 1
+  },
+  {
+    "name":"ticket-plugin",
+    "location":"../js/plugins/eventbritePlugin.html",
+    "x": 2,
+    "y": 1
   }
 ]
