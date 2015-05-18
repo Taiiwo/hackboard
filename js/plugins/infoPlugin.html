@@ -34,19 +34,19 @@
     ready: function(){
       $(document).on('eventChanged', function(e, data, status){
         var v = selectedEvent.name.text;
-        if (v != undefined){
+        if (v != undefined && v){
           $('.info-plugin#title').text(v);
         }
         var v = selectedEvent.start.local;
-        if (v != undefined){
+        if (v != undefined && v){
           $('.info-plugin#date').text("Date: " + v);
         }
         var v = selectedEvent.capacity;
-        if (v != undefined){
+        if (v != undefined && v){
           $('.info-plugin#capacity').text("Capacity: " + v);
         }
         var v = selectedEvent.organizer.name;
-        if (v != undefined){
+        if (v != undefined && v){
           $('.info-plugin#hoster').text(v);
         }
         /*
