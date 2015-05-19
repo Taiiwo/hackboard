@@ -13,7 +13,7 @@ a {
 }
 
 #homepage {
-  background-color: rgba(224, 0, 50, 0.5);
+  /* background-color: rgba(224, 0, 50, 0.5); */
   height: 100%;
 }
 
@@ -32,12 +32,12 @@ a {
   margin-bottom: 10px
 }
 
-#home-content .click-me {
+#home-content .login {
   margin: 0 auto;
   display: block;
-  width: 200px;
-  background-color: #F44336;
+  background-color: #FF7F00;
   color: white;
+  width: 300px;
   font-family: 'Roboto';
 }
 
@@ -51,28 +51,29 @@ a {
 }
 
 #event-header {
-  background-color: rgba(224, 0, 50, 1);
-  text-align: center;
+  background-color: #9C27B0
 }
 
-.search {
-  float: right;
+.search-input {
   display: inline;
-  color: #ffffff;
-  width: 350px;
-  text-align: left;
+  margin: 0 auto;
+  width: 500px;
 }
 
-.search /deep/ ::-webkit-input-placeholder {
-  color: #ffffff;
+.search-input paper-input-container .input-content.paper-input-container label {
+  color: #E3E3E3 !important;
 }
 
-.search /deep/ ::-moz-placeholder {
-  color: #ffffff;
+.search-input paper-input-container .unfocused-line.paper-input-container {
+  background: #E3E3E3 !important;
 }
 
-.search /deep/ :-ms-input-placeholder {
-  color: #ffffff;
+.search-input paper-input-container .input-content.paper-input-container input {
+  color: #ffffff !important;
+}
+
+.search-input paper-input-container .focused-line.paper-input-container {
+  background: #ffffff !important;
 }
 
 .card {
@@ -80,15 +81,14 @@ a {
   position: absolute;
   width: 290px;
   height: 290px;
-  float: left;
+  display: inline;
   margin-top: 80px;
   background-color: #fff;
 }
 
 #deck ul{
-  max-width: 960px;
+  /* max-width: 1280px; */
   height: 100%;
-  margin: 0 auto;
 }
 
 #deck ul li {
