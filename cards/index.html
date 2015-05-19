@@ -74,6 +74,12 @@
         });
       var query = $_GET('q') || "hyperlocal nottingham";
       eb.search(query);
+      $('.search-input #input').keyup(function (e) {
+        if (e.keyCode == 13) {
+          eb.search($('.search-input #input').val());
+          $('.search-input #input').blur();
+        }
+      });
     </script>
   </body>
 </html>
