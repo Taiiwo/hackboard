@@ -56,6 +56,9 @@
           Polymer.Base.importHref(plugin.location, function() {
             $(selector).append($('<li/>')
               .attr('id', 'plugin-' + plugin.name)
+              .css('width', plugin.x * 290 + (plugin.x - 1) * 15)
+              .attr('data-ss-colspan', plugin.x)
+              .css('height',plugin.y * 290 + (plugin.y - 1) * 15)
               .addClass('card')
               .append(
                 $('<'+ plugin.name +'/>')
@@ -63,10 +66,6 @@
 
               setTimeout(function(){
                 reloadGrid(selector)
-                $('#plugin-' + plugin.name)
-                  .css('width', plugin.x * 290 + (plugin.x - 1) * 15)
-                  .attr('data-ss-colspan', plugin.x)
-                  .css('height',plugin.y * 290 + (plugin.y - 1) * 15)
               },300);
           }, function() {
             console.log("error")
