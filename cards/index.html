@@ -75,7 +75,9 @@
       eb.search(query);
       $('.search-input #input').keyup(function (e) {
         if (e.keyCode == 13) {
-          eb.search($('.search-input #input').val());
+          var q = $('.search-input #input').val();
+          eb.search(q);
+          window.history.pushState('', '', location.pathname + "?q=" + q);
           $('.search-input #input').blur();
         }
       });
