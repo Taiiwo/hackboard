@@ -1,0 +1,128 @@
+$main_color: #9C27B0;
+$accent_color: #2196F3;
+
+html,
+body {
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+#homepage {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+}
+
+#home-background {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -100;
+}
+
+#home-content {
+  top: 50%;
+  position: relative;
+  transform: translateY(-50%);
+  h1 {
+    text-align: center;
+    color: white;
+    font-family: 'Roboto';
+    font-weight: 900;
+    font-size: 54pt;
+    text-shadow: #333333 2px 2px 3px;
+  }
+  p {
+    text-align: center;
+    color: white;
+    font-family: 'Roboto';
+    margin-bottom: 20px;
+  }
+}
+
+#home-login {
+  background-color: white;
+  font-family: 'Roboto';
+  width: 600px;
+  border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  paper-tabs {
+    background-color: $main_color;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+  paper-input paper-input-container {
+    margin: 0px 20px;
+    .input-content.label-is-highlighted.paper-input-container label {
+      color: #2196F3 !important;
+    }
+    .focused-line.paper-input-container {
+      background: #2196F3 !important;
+    }
+  }
+  paper-button {
+    color: white;
+    display: block;
+    background-color: $main_color;
+    margin: 20px 20px 0px 20px;
+  }
+}
+
+#ink.paper-tab {
+  color: $accent_color;
+}
+
+#selectionBar.paper-tabs {
+  background-color: $accent_color;
+}
+
+#event-header {
+  background-color: $main_color;
+  .search-input {
+    display: inline;
+    margin: 0 auto;
+    width: 500px;
+    paper-input-container {
+      .input-content.paper-input-container label {
+        color: #E3E3E3 !important;
+      }
+      .unfocused-line.paper-input-container {
+        background: #E3E3E3 !important;
+      }
+      .input-content.paper-input-container input {
+        color: #ffffff !important;
+      }
+      .focused-line.paper-input-container {
+        background: #ffffff !important;
+      }
+    }
+  }
+}
+
+#deck ul{
+  height: 100%;
+  li {
+    list-style: none;
+    .card {
+      height: 290px;
+      position: absolute;
+      width: 290px;
+      height: 290px;
+      display: inline;
+      margin-top: 80px;
+      background-color: #ffffff;
+    }
+  }
+}
