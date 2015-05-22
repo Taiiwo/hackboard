@@ -113,16 +113,14 @@ a {
 
 #deck ul{
   height: 100%;
-  li {
+  li.card {
     list-style: none;
-    .card {
-      height: 290px;
-      position: absolute;
-      width: 290px;
-      height: 290px;
-      display: inline;
-      margin-top: 80px;
-      background-color: #ffffff;
-    }
+    height: 290px;
+    position: absolute;
+    width: 290px;
+    height: 290px;
+    display: inline;
+    margin-top: 80px;
+    background-color: #ffffff;
   }
 }

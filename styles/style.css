@@ -86,15 +86,14 @@ a {
 
 #deck ul {
   height: 100%; }
-  #deck ul li {
-    list-style: none; }
-    #deck ul li .card {
-      height: 290px;
-      position: absolute;
-      width: 290px;
-      height: 290px;
-      display: inline;
-      margin-top: 80px;
-      background-color: #ffffff; }
+  #deck ul li.card {
+    list-style: none;
+    height: 290px;
+    position: absolute;
+    width: 290px;
+    height: 290px;
+    display: inline;
+    margin-top: 80px;
+    background-color: #ffffff; }
 
 /*# sourceMappingURL=style.css.map */
