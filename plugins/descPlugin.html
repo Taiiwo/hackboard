@@ -30,7 +30,7 @@
   Polymer({
     is: 'desc-plugin',
     ready: function(){
-      $(document).on('eventChanged', function(e, data, status){
+      $(document).on('pluginReady', function(e, data, status){
         var v = selectedEvent.description.html;
         if (v != undefined && v){
           $('.desc-plugin#desc').html(selectedEvent.description.html);

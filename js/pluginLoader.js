@@ -3,6 +3,7 @@ function PluginLoader(selector){
   var self = this;
   this.load = function(pluginFileUrl, successHandler){
     this.loadSuccess = successHandler;
+    // get index.json
     $.getJSON(
       pluginFileUrl,
       {},
@@ -11,10 +12,28 @@ function PluginLoader(selector){
   }
   this.pluginListHandler = function(pluginList) {
     this.pluginList = pluginList;
-    for (var i in pluginList){
-      var plugin = pluginList[i];
-      self.runPlugin(plugin);
-    }
+    $(document).on('eventChanged', function(e, data, status){
+      for (var i in pluginList){
+        var plugin = pluginList[i];
+        var runPlugin = true;
+        for (var i in plugin.deps){
+          try{
+            if(!eval(plugin.deps[i])){
+              runPlugin = false;
+              break;
+            }
+          }
+          catch (err){
+            runPlugin = false;
+            console.log(err);
+            break;
+          }
+        }
+        if (runPlugin){
+          self.runPlugin(plugin);
+        }
+      }
+    });
   }
   this.runPlugin = function(plugin){
     // this is just here for flexibility.

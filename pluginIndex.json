@@ -21,12 +21,22 @@
     "name":"info-plugin",
     "location":"../plugins/infoPlugin.html",
     "x": 1,
-    "y": 1
+    "y": 1,
+    "deps":[
+      "selectedEvent.name != undefined",
+      "selectedEvent.start != undefined",
+      "selectedEvent.capacity != undefined",
+      "selectedEvent.organizer != undefined"
+
+    ]
   },
   {
     "name":"desc-plugin",
     "location":"../plugins/descPlugin.html",
     "x": 1,
-    "y": 1
+    "y": 1,
+    "deps":[
+      "selectedEvent.description != undefined"
+    ]
   }
 ]

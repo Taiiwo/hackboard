@@ -44,11 +44,11 @@
       var selector = '#deck ul';
       var selectedEvent;
       var eb = new EventLoader;
+      var query = $_GET('q') || "hyperlocal nottingham";
+      eb.search(query);
       $(document).on('eventChanged', function(e, data, status){
         // data.events is all the events that match the search.
-        // do stuff here like searchbar drop-down suggestions
         selectedEvent = data.events[0];
-      });
         // iterate through and load all the plugins in pluginIndex.json
         var plugins = new PluginLoader(selector);
         plugins.load("../pluginIndex.json", function(plugin, selector){
@@ -62,16 +62,13 @@
               .append(
                 $('<'+ plugin.name +'/>')
               ));
-
-              setTimeout(function(){
-                reloadGrid(selector)
-              },300);
+              $( document ).trigger("pluginReady", data, status);
+                reloadGrid(selector);
           }, function() {
             console.log("error")
           });
         });
-      var query = $_GET('q') || "hyperlocal nottingham";
-      eb.search(query);
+      });
       $('.search-input #input').keyup(function (e) {
         if (e.keyCode == 13) {
           var q = $('.search-input #input').val();

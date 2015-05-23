@@ -22,7 +22,7 @@
   Polymer({
     is: 'ticket-plugin',
     ready: function(){
-      $(document).on('eventChanged', function(e, data, status){
+      $(document).on('pluginReady', function(e, data, status){
         // data.events is all the events that match the search.
         // do stuff here like searchbar drop-down suggestions
         $(".widget").attr("src", "https://www.eventbrite.com/tickets-external?eid=" + selectedEvent.id + "&ref=etckt&v=2")
