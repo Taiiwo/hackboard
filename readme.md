@@ -39,7 +39,7 @@ It's a dashboard for hack events, built for Cloudjam.
 ,
 {
   "name":"plugin-name",
-  "location":"../js/plugins/pluginFile.html",
+  "location":"../plugins/pluginFile.html",
   "x": 1,
   "y": 1
 }
