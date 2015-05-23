@@ -12,30 +12,33 @@ function PluginLoader(selector){
   }
   this.pluginListHandler = function(pluginList) {
     this.pluginList = pluginList;
-    $(document).on('eventChanged', function(e, data, status){
-      for (var i in pluginList){
-        var plugin = pluginList[i];
-        var runPlugin = true;
-        for (var i in plugin.deps){
-          try{
-            if(!eval(plugin.deps[i])){
-              runPlugin = false;
-              break;
-            }
-          }
-          catch (err){
+    var pluginListLength = pluginList.length - 1;
+    for (var a in pluginList){
+      var plugin = pluginList[a];
+      var runPlugin = true;
+      for (var i in plugin.deps){
+        try{
+          if(!eval(plugin.deps[a])){
             runPlugin = false;
-            console.log(err);
+            pluginListLength--;
             break;
           }
         }
-        if (runPlugin){
-          self.runPlugin(plugin);
+        catch (err){
+          runPlugin = false;
+          console.log(err);
+          break;
         }
       }
-    });
+      if ( a >= pluginListLength){
+        self.runPlugin(plugin, true, runPlugin );
+      }
+      else {
+        self.runPlugin(plugin, false, runPlugin);
+      }
+    }
   }
-  this.runPlugin = function(plugin){
+  this.runPlugin = function(plugin, isLast, runPlugin){
     // this is just here for flexibility.
     /*
     if (typeof this.loadSuccess == "undefined"){
@@ -51,8 +54,13 @@ function PluginLoader(selector){
         $('<div/>').html(plugin.html)
       );
     }*/
-    if (typeof this.loadSuccess != "undefined"){
+    if (typeof this.loadSuccess != "undefined" && runPlugin){
       this.loadSuccess(plugin, selector);
+    }
+    if (isLast){
+      setTimeout(function() {
+        $( document ).trigger("pluginReady", selectedEvent);
+      }, 200);
     }
   }
 }

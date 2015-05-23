@@ -3,13 +3,19 @@
     "name":"map-plugin",
     "location":"../plugins/mapPlugin.html",
     "x": 2,
-    "y": 1
+    "y": 1,
+    "deps":[
+      "selectedEvent.venue != undefined"
+    ]
   },
   {
     "name":"logo-plugin",
     "location":"../plugins/logoPlugin.html",
     "x": 1,
-    "y": 1
+    "y": 1,
+    "deps":[
+      "selectedEvent.logo != undefined"
+    ]
   },
   {
     "name":"ticket-plugin",
@@ -27,7 +33,6 @@
       "selectedEvent.start != undefined",
       "selectedEvent.capacity != undefined",
       "selectedEvent.organizer != undefined"
-
     ]
   },
   {

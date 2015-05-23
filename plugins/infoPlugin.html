@@ -32,7 +32,7 @@
   Polymer({
     is: 'info-plugin',
     ready: function(){
-      $(document).on('pluginReady', function(e, data, status){
+      $(document).on('pluginReady', function(e, plugin, event){
         var v = selectedEvent.name.text;
         if (v != undefined && v){
           $('.info-plugin#title').text(v);
