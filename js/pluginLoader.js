@@ -18,7 +18,7 @@ function PluginLoader(selector){
       var runPlugin = true;
       for (var i in plugin.deps){
         try{
-          if(!eval(plugin.deps[a])){
+          if(!eval(plugin.deps[i])){
             runPlugin = false;
             pluginListLength--;
             break;
@@ -26,6 +26,7 @@ function PluginLoader(selector){
         }
         catch (err){
           runPlugin = false;
+          pluginListLength--;
           console.log(err);
           break;
         }
@@ -60,7 +61,7 @@ function PluginLoader(selector){
     if (isLast){
       setTimeout(function() {
         $( document ).trigger("pluginReady", selectedEvent);
-      }, 200);
+      }, 500);
     }
   }
 }
