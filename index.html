@@ -12,24 +12,34 @@
   <body>
   	<video autoplay loop id="home-background">
   		<source src="video/background.webm" type="video/webm">
-  		<source src="video/background.mp4" type="video/mp4">
+  		<!--<source src="video/background.mp4" type="video/mp4">-->
   	</video>
     <div id="homepage">
       <div id="home-content">
         <h1>HackBoard</h1>
         <p>HackBoard is an online dashboard that aims to make hack events "run simple"</p>
         <div id="home-login">
-          <paper-tabs selected="0">
-            <paper-tab>Login</paper-tab>
-            <paper-tab>Sign Up</paper-tab>
-          </paper-tabs>
-          <paper-input label="Email Address"></paper-input>
-          <paper-input label="Password" type="password"></paper-input>
-          <paper-button raised>Login</paper-button>
+          <template is="dom-bind" selected="0">
+            <paper-tabs selected="{{selected}}">
+              <paper-tab>Login</paper-tab>
+              <paper-tab>Sign Up</paper-tab>
+            </paper-tabs>
+            <iron-pages selected="{{selected}}">
+              <div>
+                <paper-input label="Email Address"></paper-input>
+                <paper-input label="Password" type="password"></paper-input>
+                <paper-button raised>Login</paper-button>
+              </div>
+              <div>
+                <paper-input label="Email Address"></paper-input>
+                <paper-input label="Password" type="password"></paper-input>
+                <paper-input label="Password Repeat" type="password"></paper-input>
+                <paper-button raised>Sign up</paper-button>
+              </div>
+            </iron-pages>
+          </template>
         </div>
       </div>
     </div>
-    <script>
-    </script>
   </body>
 </html>

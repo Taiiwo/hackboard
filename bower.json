@@ -10,6 +10,8 @@
   "main": "index.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^0.9.0",
+    "iron-pages": "PolymerElements/iron-pages#^0.9.0",
+    "neon-animation":"PolymerElements/neon-animation#^0.9.0",
     "paper-behaviors": "PolymerElements/paper-behaviors#^0.9.0",
     "paper-button": "PolymerElements/paper-button#^0.9.0",
     "paper-checkbox": "PolymerElements/paper-checkbox#^0.9.0",
@@ -34,5 +36,8 @@
     "paper-toast": "PolymerElements/paper-toast#^0.9.0",
     "paper-toggle-button": "PolymerElements/paper-toggle-button#^0.9.0",
     "paper-toolbar": "PolymerElements/paper-toolbar#^0.9.0"
+  },
+  "resolutions": {
+    "webcomponentsjs": "^0.6.0"
   }
 }
