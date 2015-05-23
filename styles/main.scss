@@ -18,6 +18,12 @@ a {
 #homepage {
   background-color: rgba(0, 0, 0, 0.5);
   height: 100%;
+  paper-toast {
+    font-family: 'Roboto';
+    left: auto;
+    right: 12px;
+    background-color: #C62828 !important;
+  }
 }
 
 #home-background {
@@ -62,6 +68,21 @@ a {
     background-color: $main_color;
     color: #ffffff;
     margin-bottom: 10px;
+    #ink.paper-tab {
+      color: $accent_color;
+    }
+    #selectionBar.paper-tabs {
+      background-color: $accent_color;
+    }
+  }
+  h1 {
+    text-align: left;
+    color: gray;
+    font-family: 'Roboto';
+    font-weight: 700;
+    margin: 20px 20px 5px 20px;
+    font-size: 24pt;
+    text-shadow: none;
   }
   paper-input paper-input-container {
     margin: 0px 20px;
@@ -78,14 +99,6 @@ a {
     background-color: $main_color;
     margin: 20px 20px 0px 20px;
   }
-}
-
-#ink.paper-tab {
-  color: $accent_color;
-}
-
-#selectionBar.paper-tabs {
-  background-color: $accent_color;
 }
 
 #event-header {

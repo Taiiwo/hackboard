@@ -12,6 +12,11 @@ a {
 #homepage {
   background-color: rgba(0, 0, 0, 0.5);
   height: 100%; }
+  #homepage paper-toast {
+    font-family: 'Roboto';
+    left: auto;
+    right: 12px;
+    background-color: #C62828 !important; }
 
 #home-background {
   position: fixed;
@@ -51,6 +56,18 @@ a {
     background-color: #9C27B0;
     color: #ffffff;
     margin-bottom: 10px; }
+    #home-login paper-tabs #ink.paper-tab {
+      color: #2196F3; }
+    #home-login paper-tabs #selectionBar.paper-tabs {
+      background-color: #2196F3; }
+  #home-login h1 {
+    text-align: left;
+    color: gray;
+    font-family: 'Roboto';
+    font-weight: 700;
+    margin: 20px 20px 5px 20px;
+    font-size: 24pt;
+    text-shadow: none; }
   #home-login paper-input paper-input-container {
     margin: 0px 20px; }
     #home-login paper-input paper-input-container .input-content.label-is-highlighted.paper-input-container label {
@@ -62,12 +79,6 @@ a {
     display: block;
     background-color: #9C27B0;
     margin: 20px 20px 0px 20px; }
-
-#ink.paper-tab {
-  color: #2196F3; }
-
-#selectionBar.paper-tabs {
-  background-color: #2196F3; }
 
 #event-header {
   background-color: #9C27B0; }
