@@ -14,7 +14,7 @@
     "x": 1,
     "y": 1,
     "deps":[
-      "selectedEvent.logo != undefined"
+      "selectedEvent.logo.url != undefined"
     ]
   },
   {
