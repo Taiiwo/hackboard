@@ -1,8 +1,10 @@
 var selector = '#deck ul';
 var selectedEvent;
 var eb = new EventLoader;
-var query = $_GET('q') || "hyperlocal nottingham";
-eb.search(query);
+var query = $_GET('q');
+if (query) {
+  eb.search(query);
+}
 $(document).on('eventChanged', function(e, data, status){
   // data.events is all the events that match the search.
   selectedEvent = data.events[0];
