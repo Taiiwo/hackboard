@@ -7,8 +7,6 @@ It's a dashboard for hack events, built for Cloudjam.
 You're going to want to create your plugin file. Remember it's location. You'll use that in step 2. Replace "my-plugin" with your plugin name on line 3 *and* 22, also, remember this for step 2. Here you can basically put the meat of your plugin. Type the required styles, HTML, and JavaScript into the marked slots. The JavaScript has to be placed here as otherwise it will be executed before your elements have been put on the page. Styles will not affect other plugins or the page itself. If your plugin would not load correctly if not for the existence of some possibly unattainable variable, please use the 'deps' section of the plugin index to make sure this plugin doesn't get loaded.
 
 ``` html
-<link rel="import" href="../../components/components.html">
-
 <dom-module id="my-plugin"> <!-- Plugins must have a dash in the name! -->
 
   <style>

@@ -5,6 +5,7 @@ var query = $_GET('q');
 if (query) {
   eb.search(query);
 }
+
 $(document).on('eventChanged', function(e, data, status){
   // data.events is all the events that match the search.
   selectedEvent = data.events[0];
@@ -28,9 +29,11 @@ $(document).on('eventChanged', function(e, data, status){
     });
   });
 });
+
 $( document ).on('pluginReady', function(e, event){
   reloadGrid(selector);
 });
+
 $('.search-input #input').keyup(function (e) {
   if (e.keyCode == 13) {
     var q = $('.search-input #input').val();
@@ -39,6 +42,7 @@ $('.search-input #input').keyup(function (e) {
     $('.search-input #input').blur();
   }
 });
+
 function reloadGrid(selector){
   var options = {
     minColumns: 2,
@@ -51,6 +55,7 @@ function reloadGrid(selector){
 
   $(selector).shapeshift(options);
 }
+
 function $_GET(q,s) {
   s = s ? s : window.location.search;
   var re = new RegExp('&'+q+'(?:=([^&]*))?(?=&|$)','i');

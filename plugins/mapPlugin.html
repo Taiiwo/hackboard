@@ -13,25 +13,36 @@
 </dom-module>
 
 <script>
+  function initialize() {
+    var latLong = new google.maps.LatLng(selectedEvent.venue.latitude, selectedEvent.venue.longitude)
+
+    var mapOptions = {
+      zoom: 15,
+      center: latLong
+    };
+
+    var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+    var marker = new google.maps.Marker({
+      position: latLong,
+      map: map,
+      title: selectedEvent.venue.name
+    });
+  }
+
+  function loadScript() {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&callback=initialize';
+    document.body.appendChild(script);
+  }
+
   Polymer({
     is: 'map-plugin',
     ready: function() {
       $(document).on('pluginReady', function(e, data, status){
-        // data.events is all the events that match the search.
-        // do stuff here like searchbar drop-down suggestions
-
-        function initialize() {
-          var mapOptions = {
-            zoom: 15,
-            center: new google.maps.LatLng(selectedEvent.venue.latitude, selectedEvent.venue.longitude)
-          };
-
-          var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-        }
-
-        initialize()
+        loadScript()
       });
     }
-
-  })
+  });
 </script>
