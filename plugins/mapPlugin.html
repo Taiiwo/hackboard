@@ -1,7 +1,4 @@
-<link rel="import" href="../../components/components.html">
-
 <dom-module id="map-plugin">
-
   <style>
     #map-canvas {
       height: 100%;
@@ -9,7 +6,7 @@
   </style>
 
   <template>
-    <plugin-template>
+    <plugin-template title="Location Plugin">
       <div id="map-canvas"></div>
     </plugin-template>
   </template>
@@ -18,7 +15,7 @@
 <script>
   Polymer({
     is: 'map-plugin',
-    ready: function(){
+    ready: function() {
       $(document).on('pluginReady', function(e, data, status){
         // data.events is all the events that match the search.
         // do stuff here like searchbar drop-down suggestions

@@ -1,29 +1,28 @@
-<link rel="import" href="../../components/components.html">
-
 <dom-module id="info-plugin">
-
   <style>
-  h1, h2, h3, p {
-    font-family: 'Roboto';
-    text-align: center;
-    font-weight: 200;
-  }
-  h1 {
-    font-size: 20pt;
-    padding-top: 20px;
-  }
-  h2 {
-    padding-top: 5px;
-    font-size: 16pt;
-  }
+    h1, h2, h3, p {
+      font-family: 'Roboto';
+      text-align: center;
+      font-weight: 200;
+    }
+
+    h1 {
+      font-size: 20pt;
+      padding-top: 20px;
+    }
+
+    h2 {
+      padding-top: 5px;
+      font-size: 16pt;
+    }
   </style>
 
   <template>
-    <plugin-template>
-      <h1 id="title"></h1>
+    <plugin-template title="Information Plugin">
+      <h1 id="eventTitle"></h1>
       <h2 id="date"></h2>
       <h2 id="capacity"></h2>
-      <p id="hoster"></p>
+      <p id="host"></p>
     </plugin-template>
   </template>
 </dom-module>
@@ -35,19 +34,19 @@
       $(document).on('pluginReady', function(e, plugin, event){
         var v = selectedEvent.name.text;
         if (v != undefined && v){
-          $('.info-plugin#title').text(v);
+          $('h1#eventTitle').text(v);
         }
         var v = selectedEvent.start.local;
         if (v != undefined && v){
-          $('.info-plugin#date').text("Date: " + v);
+          $('h2#date').text("Date: " + v);
         }
         var v = selectedEvent.capacity;
         if (v != undefined && v){
-          $('.info-plugin#capacity').text("Capacity: " + v);
+          $('h2#capacity').text("Capacity: " + v);
         }
         var v = selectedEvent.organizer.name;
         if (v != undefined && v){
-          $('.info-plugin#hoster').text(v);
+          $('p#host').text(v);
         }
         /*
         var v = selectedEvent.venue.address;

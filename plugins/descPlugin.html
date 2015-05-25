@@ -1,26 +1,24 @@
-<link rel="import" href="../../components/components.html">
-
 <dom-module id="desc-plugin">
-
   <style>
-  p {
-    font-family: 'Roboto';
-    text-align: center;
-    font-size: 16px;
-    font-weight: 200;
-    margin: 10px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: 230px;
-    text-align: left;
-  }
-  p img {
-    max-width: 270px !important;
-  }
+    p {
+      font-family: 'Roboto';
+      text-align: center;
+      font-size: 16px;
+      font-weight: 200;
+      margin: 10px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      height: 230px;
+      text-align: left;
+    }
+
+    p img {
+      max-width: 270px !important;
+    }
   </style>
 
   <template>
-    <plugin-template>
+    <plugin-template title="Description Plugin">
       <p id="desc"></p>
     </plugin-template>
   </template>
@@ -33,7 +31,7 @@
       $(document).on('pluginReady', function(e, data, status){
         var v = selectedEvent.description.html;
         if (v != undefined && v){
-          $('.desc-plugin#desc').html(selectedEvent.description.html);
+          $('p#desc').html(selectedEvent.description.html);
         }
       });
     }
