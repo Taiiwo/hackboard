@@ -3,7 +3,8 @@ It's a dashboard for hack events, built for Cloudjam.
 
 ##### How to make a Plugin
 
-1) Build your plugin, using the code below as a boilerplate.
+#### 1) Build your plugin, using the code below as a boilerplate.
+Next, you're going to want to create your plugin file. It should be at the location that you set in step one. Replace "my-plugin" with your plugin name from step one on line 3 *and* 22. Here you can basically put the meat of your plugin. Type the required styles, HTML, and JavaScript into the marked slots. The JavaScript has to be placed here as otherwise it will be executed before your elements have been put on the page. Styles will not affect other plugins or the page itself. If your plugin would not load correctly if not for the existence of some possibly unattainable variable, please use the 'deps' section of the plugin index to make sure this plugin doesn't get loaded.
 
 ``` html
 <link rel="import" href="../../components/components.html">
@@ -28,19 +29,29 @@ It's a dashboard for hack events, built for Cloudjam.
 <script>
   Polymer({
     is: 'my-plugin', // Plugin name once more
-    // This is where you write JavaScript that is relevant to this component.
-    // Refer here if you are stuck: https://www.polymer-project.org/0.9/
+    $(document).on('pluginReady', function(e, data, status){
+      // This is where you write JavaScript that is relevant to this component.
+      // Refer here if you are stuck: https://www.polymer-project.org/0.9/
+    });
   })
 </script>
 ```
-2) Add your plugin details to pluginIndex.json
+#### 2) Add your plugin details to pluginIndex.json
+Add your plugin to the plugin index. You can add it anywhere, it doesn't matter. Make sure you fix your commas. Look up JSON formatting if you're unsure.
 
-``` json
+``` javascript
 ,
 {
-  "name":"plugin-name",
-  "location":"../plugins/pluginFile.html",
-  "x": 1,
-  "y": 1
+  "name":"plugin-name", // {1}
+  "location":"../plugins/pluginFile.html", // {2}
+  "x": 1, // {3}
+  "y": 1, // {3}
+  "deps": [
+    "selectedEvent.name != undefined" // {4}
+  ]
 }
 ```
+{1}: The name of your plugin. It needs a hyphen(-) in it. Remember this for later
+{2}: The file location of the plugin. You should probably put it in ../js/plugins/
+{3}: This is the grid width and height of your plugin. Note, try to avoid taking up too much space. I recommend only putting one value to 2 if you really need the space.
+{4}: This is a list of string of JavaScript. Your plugin will only be shown if all of these return true.
