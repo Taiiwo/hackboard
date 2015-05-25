@@ -37,11 +37,13 @@
     document.body.appendChild(script);
   }
 
+  loadScript()
+
   Polymer({
     is: 'map-plugin',
     ready: function() {
       $(document).on('pluginReady', function(e, data, status){
-        loadScript()
+        initialize()
       });
     }
   });
