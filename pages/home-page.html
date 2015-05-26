@@ -33,37 +33,6 @@
 </dom-module>
 
 <script>
-  var ref = new Firebase("https://hackboard.firebaseio.com");
-
-  $('.login').click(function() {
-    console.log("test")
-    ref.authWithPassword({
-      email: document.querySelector("#loginPage .email").value,
-      password: document.querySelector("#loginPage .password").value
-    }, function(error, authData) {
-      if (error) {
-        document.querySelector('#authError').text = error
-        document.querySelector('#authError').show()
-      } else {
-        console.log(authData)
-      }
-    });
-    $('.login').blur()
-  })
-
-  $('.signup').click(function() {
-    ref.createUser({
-      email: document.querySelector("#signupPage .email").value,
-      password : document.querySelector("#signupPage .password").value
-    }, function(error, userData) {
-      if (error) {
-        document.querySelector('#authError').text = error
-        document.querySelector('#authError').show()
-      }
-    });
-    $('.signup').blur()
-  })
-
   Polymer({
     is: "home-page",
     properties: {
@@ -71,6 +40,38 @@
         type: String,
         value: "0"
       }
+    },
+    attached: function() {
+      var ref = new Firebase("https://hackboard.firebaseio.com");
+
+      $('.login').click(function() {
+        console.log("test")
+        ref.authWithPassword({
+          email: document.querySelector("#loginPage .email").value,
+          password: document.querySelector("#loginPage .password").value
+        }, function(error, authData) {
+          if (error) {
+            document.querySelector('#authError').text = error
+            document.querySelector('#authError').show()
+          } else {
+            console.log(authData)
+          }
+        });
+        $('.login').blur()
+      })
+
+      $('.signup').click(function() {
+        ref.createUser({
+          email: document.querySelector("#signupPage .email").value,
+          password : document.querySelector("#signupPage .password").value
+        }, function(error, userData) {
+          if (error) {
+            document.querySelector('#authError').text = error
+            document.querySelector('#authError').show()
+          }
+        });
+        $('.signup').blur()
+      })
     }
   })
 </script>
