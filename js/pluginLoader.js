@@ -1,67 +1,67 @@
 function PluginLoader(selector){
-  // a version of this object used to call methods globally
+  this.selector = selector;
+  this.runPlugins = [];
+  this.plugins = [];
   var self = this;
-  this.load = function(pluginFileUrl, successHandler){
-    this.loadSuccess = successHandler;
+  this.load = function(pluginIndexUrl){
     // get index.json
     $.getJSON(
-      pluginFileUrl,
+      pluginIndexUrl,
       {},
-      this.pluginListHandler
+      this.pluginIndexLoaded
     );
   }
-  this.pluginListHandler = function(pluginList) {
-    this.pluginList = pluginList;
-    var pluginListLength = pluginList.length - 1;
-    for (var a in pluginList){
-      var plugin = pluginList[a];
+  this.pluginIndexLoaded = function(data, status){
+    // we got the index. Store it for use later
+    self.plugins = data;
+  }
+  this.prep = function() {
+    this.runPlugins = [];
+    // do the plugin deps
+    for (var a in this.plugins){
+      var plugin = this.plugins[a];
       var runPlugin = true;
       for (var i in plugin.deps){
         try{
-          if(!eval(plugin.deps[i])){
+          if(!eval(plugin.deps[i])){// if dep is false
             runPlugin = false;
-            pluginListLength--;
             break;
           }
         }
-        catch (err){
+        catch (err){// if dep errors
           runPlugin = false;
-          pluginListLength--;
           console.log(err);
           break;
         }
       }
-      if ( a >= pluginListLength){
-        self.runPlugin(plugin, true, runPlugin );
-      }
-      else {
-        self.runPlugin(plugin, false, runPlugin);
+      if (runPlugin){// add all the valid plugins to an array
+        this.runPlugins.push(plugin);
       }
     }
+    $( document ).trigger("pluginsReady", this.runPlugins);
   }
-  this.runPlugin = function(plugin, isLast, runPlugin){
-    // this is just here for flexibility.
-    /*
-    if (typeof this.loadSuccess == "undefined"){
-      // create a container
-      $(selector).append($('<div/>')
-        .attr('id', 'plugin' + plugin.name)
-        .addClass('card')
-      );
-      // make container into a shadow DOM
-      var shadow = $(selector + ' #plugin' + plugin.name)[0].createShadowRoot();
-      // add all the things to the shadow dom.
-      $(shadow).append(
-        $('<div/>').html(plugin.html)
-      );
-    }*/
-    if (typeof this.loadSuccess != "undefined" && runPlugin){
-      this.loadSuccess(plugin, selector);
+  this.placeRunPlugins = function () {
+    // clear the deck
+    $(this.selector).empty();
+    for (var b in this.runPlugins){
+      var plugin = this.runPlugins[b];
+      // import the plugin's polymer element
+      Polymer.Base.importHref(plugin.location, function() {
+        // once it's imported, add it to the page.
+        $(self.selector).append($('<li/>')
+          .attr('id', 'plugin-' + plugin.name)
+          .css('width', plugin.x * 290 + (plugin.x - 1) * 15)
+          .attr('data-ss-colspan', plugin.x)
+          .css('height',plugin.y * 290 + (plugin.y - 1) * 15)
+          .addClass('card')
+          .append(
+            $('<'+ plugin.name +'/>')
+          )
+        );
+      });
     }
-    if (isLast){
-      setTimeout(function() {
-        $( document ).trigger("pluginReady", selectedEvent);
-      }, 500);
-    }
+    setTimeout(function(){
+      $( document ).trigger("pluginsOnPage");
+    }, 200);
   }
 }

@@ -18,6 +18,8 @@
 
 <script>
   var selectedEvent;
+  var eb;
+  var pl;
   Polymer({
     is: "event-page",
     properties: {
@@ -26,6 +28,59 @@
       }
     },
     attached: function(){
+      var selector = '#deck ul';
+      // load all the plugins
+      pl = new PluginLoader(selector);
+      // prep the plugin data
+      pl.load('pluginIndex.json');
+      $( document ).on('pluginsReady', function(plugins, status){
+        // All the plugins are ready to be loaded to the page.
+      });
+
+      eb = new EventLoader;
+      // event search stuff
+      // search for the event ID in the URL, if one exists
+      var query = window.location.hash.slice(2);
+      if (query.match(/^\d+$/)){
+        eb.searchID(query);
+      }
+      // if the user presses enter in the searchbar, search their query
+      $('.search-input #input').keyup(function (e) {
+        if (e.keyCode == 13) {
+          var q = $('.search-input #input').val();
+          eb.search(q);
+          // unfocus the searchbar
+          $('.search-input #input').blur();
+        }
+      });
+      $(document).on('eventChanged', function(e, data, status){
+        // someone searched for something, and it's done loading.
+        // put the event we're using into a ~global variable
+        selectedEvent = data.events[0];
+        // time to add the plugins that we prep'd to the page.
+        pl.prep();
+        pl.placeRunPlugins();
+      });
+      $(document).on('pluginsOnPage', function() {
+        // the plugins have been placed into the dom. Time to reload the
+        // grid
+        reloadGrid(selector);
+      });
+      function reloadGrid(selector){
+        var options = {
+          minColumns: 2,
+          gutterX: 15,
+          gutterY: 15,
+          handle: "header",
+          centerWhileDragging: false,
+          animationSpeed: 300
+        };
+
+        $(selector).shapeshift(options);
+      }
+    }
+  });
+      /*
       var selector = '#deck ul';
       var eb = new EventLoader;
       var query = $_GET('q');
@@ -60,14 +115,7 @@
         reloadGrid(selector);
       });
 
-      $('.search-input #input').keyup(function (e) {
-        if (e.keyCode == 13) {
-          var q = $('.search-input #input').val();
-          eb.search(q);
-          $(selector).empty();
-          $('.search-input #input').blur();
-        }
-      });
+
       var query = window.location.hash.slice(2);
       if (query.match(/^\d+$/)){
         eb.searchID(query);
@@ -93,5 +141,5 @@
         return (s=s.replace(/^\?/,'&').match(re)) ? (typeof s[1] == 'undefined' ? '' : decodeURIComponent(s[1])) : undefined;
       }
     }
-  });
+  });*/
 </script>

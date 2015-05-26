@@ -27,13 +27,11 @@
 <script>
   Polymer({
     is: 'desc-plugin',
-    ready: function(){
-      $(document).on('pluginReady', function(e, data, status){
-        var v = selectedEvent.description.html;
-        if (v != undefined && v){
-          $('p#desc').html(selectedEvent.description.html);
-        }
-      });
+    attached: function(){
+      var v = selectedEvent.description.html;
+      if (v != undefined && v){
+        $('p#desc').html(selectedEvent.description.html);
+      }
     }
 
   })

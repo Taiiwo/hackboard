@@ -41,10 +41,8 @@
 
   Polymer({
     is: 'map-plugin',
-    ready: function() {
-      $(document).on('pluginReady', function(e, data, status){
-        initialize()
-      });
+    attached: function() {
+      initialize();
     }
   });
 </script>
