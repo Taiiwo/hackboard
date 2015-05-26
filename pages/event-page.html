@@ -59,6 +59,10 @@
         selectedEvent = data.events[0];
         // update the url
         window.history.pushState('', '', location.pathname + "#/" + selectedEvent.id);
+        // update the searchbar
+        $('.search-input #input').val(selectedEvent.name.text);
+        $('.search-input #input').focus();
+        $('.search-input #input').blur();
         // time to add the plugins that we prep'd to the page.
         pl.prep();
         pl.placeRunPlugins();
