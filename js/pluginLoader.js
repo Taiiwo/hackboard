@@ -46,19 +46,18 @@ function PluginLoader(selector){
     for (var b in this.runPlugins){
       var plugin = this.runPlugins[b];
       // import the plugin's polymer element
-      Polymer.Base.importHref(plugin.location, function() {
-        // once it's imported, add it to the page.
-        $(self.selector).append($('<li/>')
-          .attr('id', 'plugin-' + plugin.name)
-          .css('width', plugin.x * 290 + (plugin.x - 1) * 15)
-          .attr('data-ss-colspan', plugin.x)
-          .css('height',plugin.y * 290 + (plugin.y - 1) * 15)
-          .addClass('card')
-          .append(
-            $('<'+ plugin.name +'/>')
-          )
-        );
-      });
+      Polymer.Base.importHref(plugin.location)
+      // once it's imported, add it to the page.
+      $(self.selector).append($('<li/>')
+        .attr('id', 'plugin-' + plugin.name)
+        .css('width', plugin.x * 290 + (plugin.x - 1) * 15)
+        .attr('data-ss-colspan', plugin.x)
+        .css('height',plugin.y * 290 + (plugin.y - 1) * 15)
+        .addClass('card')
+        .append(
+          $('<'+ plugin.name +'/>')
+        )
+      );
     }
     setTimeout(function(){
       $( document ).trigger("pluginsOnPage");
