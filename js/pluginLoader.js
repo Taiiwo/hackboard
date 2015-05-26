@@ -61,6 +61,6 @@ function PluginLoader(selector){
     }
     setTimeout(function(){
       $( document ).trigger("pluginsOnPage");
-    }, 200);
+    }, 500);
   }
 }
