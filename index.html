@@ -15,7 +15,7 @@
   <body>
     <app-router>
       <app-route regex path="/\/$/" import="pages/home-page.html"></app-route>
-      <app-route path="/:id" import="pages/event-page.html"></app-route>
+      <app-route regex path="/(\d*|events)$/" import="pages/event-page.html"></app-route>
     </app-router>
   </body>
 </html>

@@ -29,16 +29,15 @@
       var selector = '#deck ul';
       var eb = new EventLoader;
       var query = $_GET('q');
-      if (query) {
-        eb.search(query);
-      }
 
       $(document).on('eventChanged', function(e, data, status){
         // data.events is all the events that match the search.
         selectedEvent = data.events[0];
+        // change the url
+        window.history.pushState('', '', location.pathname + "#/" + selectedEvent.id);
         // iterate through and load all the plugins in pluginIndex.json
-        var plugins = new PluginLoader(selector);
         $(selector).empty();
+        var plugins = new PluginLoader(selector);
         plugins.load("pluginIndex.json", function(plugin, selector){
           Polymer.Base.importHref(plugin.location, function() {
             $(selector).append($('<li/>')
@@ -65,10 +64,15 @@
         if (e.keyCode == 13) {
           var q = $('.search-input #input').val();
           eb.search(q);
-          window.history.pushState('', '', location.pathname + "?q=" + q);
+          $(selector).empty();
           $('.search-input #input').blur();
         }
       });
+      var query = window.location.hash.slice(2);
+      if (query.match(/^\d+$/)){
+        eb.searchID(query);
+        $(selector).empty();
+      }
 
       function reloadGrid(selector){
         var options = {
@@ -89,5 +93,5 @@
         return (s=s.replace(/^\?/,'&').match(re)) ? (typeof s[1] == 'undefined' ? '' : decodeURIComponent(s[1])) : undefined;
       }
     }
-  })
+  });
 </script>
