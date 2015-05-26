@@ -57,6 +57,8 @@
         // someone searched for something, and it's done loading.
         // put the event we're using into a ~global variable
         selectedEvent = data.events[0];
+        // update the url
+        window.history.pushState('', '', location.pathname + "#/" + selectedEvent.id);
         // time to add the plugins that we prep'd to the page.
         pl.prep();
         pl.placeRunPlugins();
