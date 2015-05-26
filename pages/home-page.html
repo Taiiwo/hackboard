@@ -1,0 +1,76 @@
+<dom-module id="home-page">
+  <template>
+    <video autoplay loop id="home-background">
+      <source src="../video/background.webm" type="video/webm">
+  	  <!--<source src="../video/background.mp4" type="video/mp4">-->
+    </video>
+    <div id="homepage">
+      <div id="home-content">
+        <h1>HackBoard</h1>
+        <p>HackBoard is an online dashboard that aims to make hack events "run simple"</p>
+        <div id="home-login">
+          <paper-tabs selected="{{selected}}">
+            <paper-tab>Login</paper-tab>
+            <paper-tab>Sign Up</paper-tab>
+          </paper-tabs>
+          <iron-pages selected="{{selected}}">
+            <div id="loginPage">
+              <paper-input class="email" label="Email Address"></paper-input>
+              <paper-input class="password" label="Password" type="password"></paper-input>
+              <paper-button class="login" raised>Login</paper-button>
+            </div>
+            <div id="signupPage">
+              <paper-input class="email" label="Email Address"></paper-input>
+              <paper-input class="password" label="Password" type="password"></paper-input>
+              <paper-button class="signup" raised>Sign up</paper-button>
+            </div>
+          </iron-pages>
+        </div>
+      </div>
+      <paper-toast id="authError" role="alert"></paper-toast>
+    </div>
+  </template>
+</dom-module>
+
+<script>
+  var ref = new Firebase("https://hackboard.firebaseio.com");
+
+  $('.login').click(function() {
+    console.log("test")
+    ref.authWithPassword({
+      email: document.querySelector("#loginPage .email").value,
+      password: document.querySelector("#loginPage .password").value
+    }, function(error, authData) {
+      if (error) {
+        document.querySelector('#authError').text = error
+        document.querySelector('#authError').show()
+      } else {
+        console.log(authData)
+      }
+    });
+    $('.login').blur()
+  })
+
+  $('.signup').click(function() {
+    ref.createUser({
+      email: document.querySelector("#signupPage .email").value,
+      password : document.querySelector("#signupPage .password").value
+    }, function(error, userData) {
+      if (error) {
+        document.querySelector('#authError').text = error
+        document.querySelector('#authError').show()
+      }
+    });
+    $('.signup').blur()
+  })
+
+  Polymer({
+    is: "home-page",
+    properties: {
+      selected: {
+        type: String,
+        value: "0"
+      }
+    }
+  })
+</script>

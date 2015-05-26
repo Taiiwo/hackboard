@@ -4,77 +4,18 @@
     <title>Dshbrd</title>
     <meta charset='UTF-8'/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="components/webcomponentsjs/webcomponents-lite.js"></script>
     <script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.5/firebase.js"></script>
-    <link type="text/css" rel="stylesheet" href="styles/style.css"/>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="../components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link type="text/css" rel="stylesheet" href="../styles/style.css"/>
     <link rel="import" href="components/components.html">
+
   </head>
 
   <body>
-  	<video autoplay loop id="home-background">
-  		<source src="video/background.webm" type="video/webm">
-  		<!--<source src="video/background.mp4" type="video/mp4">-->
-  	</video>
-    <div id="homepage">
-      <div id="home-content">
-        <h1>HackBoard</h1>
-        <p>HackBoard is an online dashboard that aims to make hack events "run simple"</p>
-        <div id="home-login">
-          <template is="dom-bind" selected="0">
-            <paper-tabs selected="{{selected}}">
-              <paper-tab>Login</paper-tab>
-              <paper-tab>Sign Up</paper-tab>
-            </paper-tabs>
-            <iron-pages selected="{{selected}}">
-              <div id="loginPage">
-                <h1>Login</h1>
-                <paper-input class="email" label="Email Address"></paper-input>
-                <paper-input class="password" label="Password" type="password"></paper-input>
-                <paper-button class="login" raised>Login</paper-button>
-              </div>
-              <div id="signupPage">
-                <h1>Sign up</h1>
-                <paper-input class="email" label="Email Address"></paper-input>
-                <paper-input class="password" label="Password" type="password"></paper-input>
-                <paper-button class="signup" raised>Sign up</paper-button>
-              </div>
-            </iron-pages>
-          </template>
-        </div>
-      </div>
-      <paper-toast id="authError" role="alert" text="Incorrect Email or Password."></paper-toast>
-    </div>
-    <script>
-      var ref = new Firebase("https://hackboard.firebaseio.com");
-
-      $('.login').click(function(){
-        ref.authWithPassword({
-          email: document.querySelector("#loginPage .email").value,
-          password: document.querySelector("#loginPage .password").value
-        }, function(error, authData) {
-          if (error) {
-            document.querySelector('#authError').text = error
-            document.querySelector('#authError').show()
-          } else {
-            console.log("Authenticated successfully with payload:", authData);
-          }
-        });
-      })
-
-      $('.signup').click(function(){
-        ref.createUser({
-          email: document.querySelector("#signupPage .email").value,
-          password : document.querySelector("#signupPage .password").value
-        }, function(error, userData) {
-          if (error) {
-            document.querySelector('#authError').text = error
-            document.querySelector('#authError').show()
-          } else {
-            console.log("Successfully created user account with uid:", userData.uid);
-          }
-        });
-      })
-    </script>
+    <app-router>
+      <app-route path="/" import="pages/home-page.html"></app-route>
+      <app-route path="/:id" import="pages/event-page.html"></app-route>
+    </app-router>
   </body>
 </html>
