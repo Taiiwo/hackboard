@@ -1,4 +1,6 @@
 function EventLoader(){
+  this.events = [];
+  this.status = "";
   this.search = function(term){
     $.getJSON(
       "https://www.eventbriteapi.com/v3/events/search/",
@@ -7,7 +9,14 @@ function EventLoader(){
         token: "R5KWMVH7GMWKCTBS6CQH"
       },
       function(data, status){
-        $( document ).trigger("eventChanged", data, status);
+        this.events = data;
+        this.status = status;
+        $( document ).trigger("eventChanged", this.events, this.status);
+      },
+      function (){
+        this.events = data;
+        this.status = status;
+        $( document ).trigger("eventChanged", this.events, this.status);
       }
     );
   }
