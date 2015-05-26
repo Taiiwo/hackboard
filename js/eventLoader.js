@@ -5,6 +5,7 @@ function EventLoader(){
     $.getJSON(
       "https://www.eventbriteapi.com/v3/events/search/",
       {
+        categories: '102',
         q: term,
         token: "R5KWMVH7GMWKCTBS6CQH"
       },
