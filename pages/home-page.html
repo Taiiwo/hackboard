@@ -13,7 +13,7 @@
             <paper-tab>Login</paper-tab>
             <paper-tab>Sign Up</paper-tab>
           </paper-tabs>
-          <firebase-auth id="firebaseLogin" user="{{user}}" status-known="{{statusKnown}}" location="https://hackboard.firebaseio.com" provider="password" on-error="errorHandler" on-user-created="userStatus"></firebase-auth>
+          <firebase-auth id="firebaseLogin" user="{{user}}" location="https://hackboard.firebaseio.com" provider="password" on-error="errorHandler"></firebase-auth>
           <iron-pages selected="{{selected}}">
             <div id="loginPage">
               <paper-input class="email" label="Email Address" value="{{email::input}}"></paper-input>
@@ -54,19 +54,14 @@
     login: function() {
       this.$.firebaseLogin.login({email: this.email, password: this.password});
       this.$.loginButton.blur()
-      console.log(this.user)
     },
     signup: function() {
       this.$.firebaseLogin.createUser(this.email, this.password);
       this.$.signupButton.blur()
-      console.log(this.user)
     },
     errorHandler: function(error) {
       document.querySelector('#authError').text = error.detail.message
       document.querySelector('#authError').show()
-    },
-    userStatus: function(event) {
-      console.log(event.type)
     }
   })
 </script>
