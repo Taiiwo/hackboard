@@ -27,11 +27,9 @@ You're going to want to create your plugin file. Remember it's location. You'll 
 <script>
   Polymer({
     is: 'my-plugin', // Plugin name once more
-    ready: function(){
-      $(document).on('pluginReady', function(e, data, status){
-        // This is where you write JavaScript that is relevant to this component.
-        // Refer here if you are stuck: https://www.polymer-project.org/0.9/
-      });
+    attached: function(){
+      // This is where you write JavaScript that is relevant to this component.
+      // Refer here for reference: https://www.polymer-project.org/0.9/
     }
   });
 </script>

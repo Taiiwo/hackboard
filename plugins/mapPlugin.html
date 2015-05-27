@@ -13,16 +13,18 @@
 </dom-module>
 
 <script>
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&callback=initialize';
+  document.body.appendChild(script)
+
   function initialize() {
     var latLong = new google.maps.LatLng(selectedEvent.venue.latitude, selectedEvent.venue.longitude)
-
     var mapOptions = {
       zoom: 15,
       center: latLong
     };
-
     var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
     var marker = new google.maps.Marker({
       position: latLong,
       map: map,
@@ -30,19 +32,20 @@
     });
   }
 
-  function loadScript() {
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&callback=initialize';
-    document.body.appendChild(script);
-  }
-
-  loadScript()
-
   Polymer({
     is: 'map-plugin',
-    attached: function() {
-      initialize();
+    properties: {
+      latitude: {
+        type: String
+      },
+      longitude: {
+        type: String
+      }
+    },
+    ready: function() {
+      $(document).on('pluginsOnPage', function(e, data, status){
+        initialize()
+      });
     }
   });
 </script>
