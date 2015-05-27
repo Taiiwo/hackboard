@@ -8,13 +8,14 @@
     <script type="text/javascript" src="components/webcomponentsjs/webcomponents-lite.js"></script>
     <link type="text/css" rel="stylesheet" href="styles/style.css"/>
     <link rel="import" href="components/components.html">
-
   </head>
 
   <body>
     <app-router>
-      <app-route regex path="/\/$/" import="pages/home-page.html"></app-route>
-      <app-route regex path="/(\d*|events)$/" import="pages/event-page.html"></app-route>
+      <app-route path="/**/" import="pages/home-page.html"></app-route>
+      <app-route path="/404" import="pages/not-found-page.html"></app-route>
+      <app-route path="/:id" import="pages/event-page.html"></app-route>
+      <app-route path="*" redirect="/404"></app-route>
     </app-router>
   </body>
 </html>

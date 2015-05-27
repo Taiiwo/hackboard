@@ -12,7 +12,7 @@ function EventLoader(){
       function(data, status){
         this.events = data;
         this.status = status;
-        $( document ).trigger("eventChanged", this.events, this.status);
+        $(document).trigger("eventChanged", this.events, this.status);
       }
     );
   }
@@ -23,10 +23,12 @@ function EventLoader(){
         token: "R5KWMVH7GMWKCTBS6CQH"
       },
       function(data, status){
-        this.events = {events : [data]};
+        this.events = {events: [data]};
         this.status = status;
-        $( document ).trigger("eventChanged", this.events, this.status);
+        $(document).trigger("eventChanged", this.events, this.status);
       }
-    );
+    ).fail(function() {
+      document.querySelector("app-router").go('/404')
+    })
   }
 }

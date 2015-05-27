@@ -129,3 +129,36 @@ a {
     background-color: #ffffff;
   }
 }
+
+#error {
+  height: 100%;
+  width: 100%;
+  background: url("../images/404.gif");
+  background-size: cover;
+  background-position: center center;
+  #error-content {
+    text-align: center;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    h1 {
+      font-family: 'Roboto';
+      font-size: 72pt;
+      color: white;
+    }
+    h3 {
+      font-family: 'Roboto';
+      font-size: 18pt;
+      font-weight: 200;
+      color: white;
+    }
+    paper-button {
+      font-family: 'Roboto';
+      margin-top: 30px;
+      width: 150px;
+      color: #ffffff;
+      background-color: $main_color;
+    }
+  }
+}

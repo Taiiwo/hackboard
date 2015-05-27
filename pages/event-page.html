@@ -40,14 +40,18 @@
       eb = new EventLoader;
       // event search stuff
       // search for the event ID in the URL, if one exists
-      var query = window.location.hash.slice(2);
+      var query = this.id
       if (query.match(/^\d+$/)){
         eb.searchID(query);
+      } else {
+        document.querySelector('app-router').go('/404')
       }
+
       // if the user presses enter in the searchbar, search their query
       $('.search-input #input').keyup(function (e) {
         if (e.keyCode == 13) {
           var q = $('.search-input #input').val();
+          $('#deck ul').css("opacity","0")
           eb.search(q);
           // unfocus the searchbar
           $('.search-input #input').blur();
@@ -71,7 +75,7 @@
         reloadGrid(selector);
         $('#deck ul').animate({
           opacity: 1
-        }, 1000)
+        }, 500)
       });
 
       function reloadGrid(selector){
