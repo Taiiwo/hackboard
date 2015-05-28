@@ -4,7 +4,6 @@
       <div id="error-content">
         <h1>404.</h1>
         <h3>This event doesn't exist.</h3>
-        <paper-button on-tap="goBack" raised>Go Back</paper-button>
       </div>
     </div>
   </template>
@@ -12,9 +11,6 @@
 
 <script>
   Polymer({
-    is: "not-found-page",
-    goBack: function() {
-      window.history.go(-2);
-    }
+    is: "not-found-page"
   })
 </script>
