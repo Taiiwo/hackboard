@@ -1,4 +1,5 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.5/firebase.js"></script>
 <script type="text/javascript" src="../js/shapeshift.js"></script>
 <script type="text/javascript" src="../js/eventLoader.js"></script>
 <script type="text/javascript" src="../js/pluginLoader.js"></script>
@@ -57,11 +58,13 @@
           $('.search-input #input').blur();
         }
       });
-
-      $(document).on('eventChanged', function(e, data, status){
+      $(document).on('eventSearchComplete', function(e, data) {
+        eb.selectEvent(0);
+      })
+      $(document).on('eventSelected', function(e, data, status){
         // someone searched for something, and it's done loading.
         // put the event we're using into a ~global variable
-        selectedEvent = data.events[0];
+        selectedEvent = eb.selectedEvent;
         // update the url
         window.history.pushState('', '', location.pathname + "#/" + selectedEvent.id);
         // time to add the plugins that we prep'd to the page.
