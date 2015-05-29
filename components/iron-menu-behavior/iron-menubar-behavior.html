@@ -11,14 +11,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="iron-menu-behavior.html">
 
-<!--
-`Polymer.IronMenubarBehavior` implements accessible menubar behavior.
--->
-
 <script>
 
-  /** @polymerBehavior */
-  Polymer.IronMenubarBehavior = [{
+  /**
+   * `Polymer.IronMenubarBehavior` implements accessible menubar behavior.
+   *
+   * @polymerBehavior Polymer.IronMenubarBehavior
+   */
+  Polymer.IronMenubarBehaviorImpl = {
 
     hostAttributes: {
       'role': 'menubar'
@@ -54,6 +54,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this._focusWithKeyboardEvent(event);
     }
 
-  }].concat(Polymer.IronMenuBehavior);
+  };
+
+  /** @polymerBehavior Polymer.IronMenubarBehavior */
+  Polymer.IronMenubarBehavior = [
+    Polymer.IronMenuBehavior,
+    Polymer.IronMenubarBehaviorImpl
+  ];
 
 </script>

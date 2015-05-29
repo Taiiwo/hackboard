@@ -8,6 +8,12 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/classes/iron-flex-layout.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../iron-behaviors/iron-control-state.html">
+<link rel="import" href="../paper-ripple/paper-ripple.html">
+
 <!--
 `paper-tab` is styled to look like a tab.  It should be used in conjunction with
 `paper-tabs`.
@@ -20,15 +26,17 @@ Example:
       <paper-tab>TAB 3</paper-tab>
     </paper-tabs>
 
-@group Paper Elements
-@element paper-tab
-@homepage github.io
--->
+### Styling
 
-<link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-flex-layout/classes/iron-flex-layout.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../paper-ripple/paper-ripple.html">
+The following custom properties and mixins are available for styling:
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--paper-tab-ink` | Ink color | `--paper-yellow-a100`
+`--paper-tab` | Mixin applied to the tab | `{}`
+`--paper-tab-content` | Mixin applied to the tab content | `{}`
+
+-->
 
 <dom-module id="paper-tab">
 
@@ -43,9 +51,13 @@ Example:
       position: relative;
       padding: 0 12px;
       overflow: hidden;
-      cursor: default;
+      cursor: pointer;
 
       @apply(--paper-tab);
+    }
+
+    :host(:focus) {
+      outline: none;
     }
 
     :host([link]) {
@@ -62,11 +74,16 @@ Example:
     }
 
     :host(:not(.iron-selected)) > .tab-content {
-      opacity: 0.6;
+      opacity: 0.8;
+    }
+
+    :host(:focus) .tab-content {
+      opacity: 1;
+      font-weight: 700;
     }
 
     #ink {
-      color: #ffff8d;
+      color: var(--paper-tab-ink, --paper-yellow-a100);
       pointer-events: none;
     }
 
@@ -84,11 +101,11 @@ Example:
 
   <template>
 
-    <div class="tab-content flex auto center-center horizontal layout">
+    <div class="tab-content flex-auto center-center horizontal layout">
       <content></content>
     </div>
 
-    <template is="dom-if" if="{{!noink}}">
+    <template is="dom-if" if="[[!noink]]">
       <paper-ripple id="ink" initial-opacity="0.95" opacity-decay-velocity="0.98"></paper-ripple>
     </template>
 
@@ -102,20 +119,26 @@ Example:
 
     is: 'paper-tab',
 
+    behaviors: [
+      Polymer.IronControlState
+    ],
+
     properties: {
 
       /**
        * If true, ink ripple effect is disabled.
        *
        * @attribute noink
-       * @type Boolean
-       * @default false
        */
       noink: {
         type: Boolean,
         value: false
       }
 
+    },
+
+    hostAttributes: {
+      role: 'tab'
     },
 
     listeners: {
