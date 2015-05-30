@@ -44,8 +44,9 @@ function EventLoader(){
     for (var index in data.events){
       var event = data.events[index];
       var obj= {};
-      obj[event.id.toString()] = event;
-      this.db.update(obj);
+      //obj[event.id.toString()] = event;
+      var ref = this.db.child(event.id.toString());
+      ref.update(event);
     }
   }
 }
