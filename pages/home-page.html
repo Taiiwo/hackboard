@@ -57,7 +57,6 @@
     login: function() {
       this.$.firebaseLogin.login({email: this.email, password: this.password});
       this.$.loginButton.blur()
-      console.log(this.user);
       var self = this;
       $(document).on('login', function(){
         self.goodToast("Login Successful!");
