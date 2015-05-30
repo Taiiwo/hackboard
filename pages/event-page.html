@@ -10,7 +10,7 @@
       <h3>HackBoard</h3>
       <div id="search-box">
         <paper-input class="search-input" label="search for an event" no-label-float></paper-input>
-        <paper-icon-button on-tap="search" icon="search" title="search"></paper-icon-button>
+        <paper-icon-button on-tap="searchEvent" icon="search" title="search"></paper-icon-button>
       </div>
     </paper-toolbar>
 
@@ -29,6 +29,16 @@
     properties: {
       id: {
         type: String
+      }
+    },
+    searchEvent: function() {
+      // if the user presses enter in the searchbar, search their query
+      var q = $('.search-input #input').val();
+      if (q != "") {
+        $('#deck ul').css("opacity","0")
+        eb.search(q);
+        // unfocus the searchbar
+        $('.search-input #input').blur();
       }
     },
     attached: function(){
@@ -51,19 +61,18 @@
         document.querySelector('app-router').go('/404')
       }
 
+      var self = this;
       // if the user presses enter in the searchbar, search their query
       $('.search-input #input').keyup(function (e) {
         if (e.keyCode == 13) {
-          var q = $('.search-input #input').val();
-          $('#deck ul').css("opacity","0")
-          eb.search(q);
-          // unfocus the searchbar
-          $('.search-input #input').blur();
+          self.searchEvent()
         }
       });
+
       $(document).on('eventSearchComplete', function(e, data) {
         eb.selectEvent(0);
       })
+
       $(document).on('eventSelected', function(e, data, status){
         // someone searched for something, and it's done loading.
         // put the event we're using into a ~global variable
@@ -95,16 +104,6 @@
         };
 
         $(selector).shapeshift(options);
-      }
-    },
-    search: function() {
-      // if the user presses enter in the searchbar, search their query
-      var q = $('.search-input #input').val();
-      if (q != "") {
-        $('#deck ul').css("opacity","0")
-        eb.search(q);
-        // unfocus the searchbar
-        $('.search-input #input').blur();
       }
     }
   });
