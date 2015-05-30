@@ -18,11 +18,16 @@ a {
 #homepage {
   background-color: rgba(0, 0, 0, 0.5);
   height: 100%;
-  paper-toast {
+  paper-toast{
     font-family: 'Roboto';
     left: auto;
     right: 12px;
+  }
+  #badToast {
     background-color: #C62828 !important;
+  }
+  #goodToast {
+    background-color: #4CAF50 !important;
   }
 }
 

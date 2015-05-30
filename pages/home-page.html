@@ -28,12 +28,15 @@
           </iron-pages>
         </div>
       </div>
-      <paper-toast id="authError" role="alert"></paper-toast>
+      <paper-toast id="badToast" role="alert"></paper-toast>
+      <paper-toast id="goodToast" role="alert"></paper-toast>
     </div>
   </template>
 </dom-module>
 
 <script>
+  // placeholder until we get an actual events url
+  var eventsPageUrl = "/17015133723";
   Polymer({
     is: "home-page",
     properties: {
@@ -54,14 +57,58 @@
     login: function() {
       this.$.firebaseLogin.login({email: this.email, password: this.password});
       this.$.loginButton.blur()
+      console.log(this.user);
+      var self = this;
+      $(document).on('login', function(){
+        self.goodToast("Login Successful!");
+        // set auth global
+        window.authenticatedUser = self.user;
+        // set auth cookie
+        $.cookie("authenticatedUser", JSON.stringify(self.user));
+        // redirect user to events page
+        document.querySelector('app-router').go(eventsPageUrl);
+      });
     },
     signup: function() {
       this.$.firebaseLogin.createUser(this.email, this.password);
+      var self = this;
+      $(document).on('user-created', function(){
+        self.goodToast("Registration Successful!");
+        // go to login tab
+        document.querySelector('paper-tabs').selected = 0;
+      });
       this.$.signupButton.blur()
     },
     errorHandler: function(error) {
-      document.querySelector('#authError').text = error.detail.message
-      document.querySelector('#authError').show()
+      document.querySelector('#badToast').text = error.detail.message
+      document.querySelector('#badToast').show()
+    },
+    badToast: function(message){
+      document.querySelector('#badToast').text = message
+      document.querySelector('#badToast').show()
+    },
+    goodToast: function(message){
+      document.querySelector('#goodToast').text = message
+      document.querySelector('#goodToast').show()
+    },
+    attached: function(){
+      var auth = $.cookie("authenticatedUser");
+      if (this.isJson(auth)){
+        auth = JSON.parse(auth);
+        // we're already auth'd. Set the global and to to the events page
+        setTimeout( function (){ //  I just thought this was nicer to look at.
+          window.authenticatedUser = this.user;
+          document.querySelector('app-router').go(eventsPageUrl);
+        }, 500);
+      }
+    },
+    isJson: function(str) {
+      try {
+          JSON.parse(str);
+      } catch (e) {
+          return false;
+      }
+      return true;
     }
   })
 </script>
