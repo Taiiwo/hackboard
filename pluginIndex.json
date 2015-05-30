@@ -18,12 +18,6 @@
     ]
   },
   {
-    "name":"ticket-plugin",
-    "location":"plugins/eventbritePlugin.html",
-    "x": 2,
-    "y": 1
-  },
-  {
     "name":"info-plugin",
     "location":"plugins/infoPlugin.html",
     "x": 1,
