@@ -43,5 +43,14 @@
     "deps":[
       "selectedEvent.description != undefined"
     ]
+  },
+  {
+    "name":"twitter-plugin",
+    "location":"plugins/twitterPlugin.html",
+    "x": 1,
+    "y": 1,
+    "deps":[
+      "selectedEvent.twitterHashtag != undefined"
+    ]
   }
 ]
