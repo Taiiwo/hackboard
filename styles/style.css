@@ -15,8 +15,11 @@ a {
   #homepage paper-toast {
     font-family: 'Roboto';
     left: auto;
-    right: 12px;
+    right: 12px; }
+  #homepage #badToast {
     background-color: #C62828 !important; }
+  #homepage #goodToast {
+    background-color: #4CAF50 !important; }
 
 #home-background {
   position: fixed;
