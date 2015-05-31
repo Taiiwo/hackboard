@@ -17,6 +17,12 @@
     <div id="deck">
       <ul></ul>
     </div>
+    <paper-dialog id="editEventLightbox">
+      <h2>Edit Event Data</h2>
+      <paper-textarea id="propEditor"></paper-textarea>
+      <paper-button id="submitEventEdit">Edit Event</paper-button>
+    </paper-dialog>
+    <paper-fab icon="add" on-tap="window.eventsPage.editEvent"></paper-fab> 
   </template>
 </dom-module>
 
@@ -41,7 +47,74 @@
         $('.search-input #input').blur();
       }
     },
+    editEvent: function() {
+      // work out what eventbrite data we still need
+      var idealEvent = [
+        ["name", "text"],
+        ["name", "html"],
+        ["start"],
+        ["id"],
+        ["description", "text"],
+        ["description", "html"],
+        ["logo", "url"],
+        ["organiser", ],
+        ["venue", "latitude"],
+        ["venue", "longitude"],
+        ["venue", "name"],
+        ["twitterWidgetId"],
+        ["twitterHastags"],
+        ["githubHashtags"]
+      ];
+      var requiredProperties = {};
+      for (var a in idealEvent){
+        var prop = idealEvent[a];
+        // if the property is not in the eventbrite data
+        if (!propExists("eb.data.events[0].", prop)){
+          // if the property has already been edited
+          if (propExists("selectedEvent.", prop)){
+            // set the value to the edited value
+            var propVal = eval("selectedEvent." + prop.join('.'))
+            requiredProperties[prop.join('.')] = propVal;
+          }
+          else {
+            // else leave it false.
+            requiredProperties[prop.join('.')] = false;
+          }
+        }
+      }
+      // turn that into json
+      var propString = JSON.stringify(requiredProperties, null, 4);
+      // set button editEvent
+      $('#submitEventEdit').click(function(){
+        eb.editEvent($('#propEditor').val())
+      });
+      // display it in the lightbox
+      document.getElementById('editEventLightbox').open();
+
+      $('#propEditor').val(propString);
+
+      function propExists(obj, prop){
+        var js = obj + prop.join('.');
+        var propExists = false;
+        try {
+          if (eval(js) != undefined){
+            // already got this info.
+            propExists = true;
+          }
+          else {
+            // we need this info
+            propExists = false;
+          }
+        }
+        catch (e){
+          // we need this info
+          propExists = false;
+        }
+        return propExists;
+      }
+    },
     attached: function(){
+      window.eventsPage = this;
       var selector = '#deck ul';
       // load all the plugins
       pl = new PluginLoader(selector);
