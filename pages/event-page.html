@@ -62,7 +62,7 @@
           "html": false
         },
         "logo": {"url": false},
-        "organiser": false,
+        "organizer": false,
         "venue": {
           "latitude":false,
           "longitude": false,
@@ -72,25 +72,66 @@
         "twitterHastags": false,
         "githubHashtags": false
       };
-      var requiredProperties = {};
-      for (var key in idealEvent){
-        var prop = idealEvent[a];
-        if (typeof prop == Object){
-
+      var eventIndex;
+      for ( var event in eb.data.events){
+        if (eb.data.events[event].id == selectedEvent.id) {
+          eventIndex = event;
         }
-        else {
-          // if the property is not in the eventbrite data
-          if (!propExists("eb.data.events[0].", prop)){
-            // if the property has already been edited
-            if (propExists("selectedEvent.", prop)){
-              // set the value to the edited value
-              var propVal = eval("selectedEvent." + prop.join('.'))
-              requiredProperties[prop.join('.')] = propVal;
+      }
+      var neededProps = obj_diff(idealEvent, eb.data.events[eventIndex]);
+
+      // turn that into json
+      var propString = JSON.stringify(neededProps, null, 4);
+      // set button editEvent
+      $('#submitEventEdit').click(function(){
+        var json = $('#propEditor').val();
+        if(eb.isJson(json)){
+          eb.editEvent(json);
+        }
+      });
+      // display it in the lightbox
+      document.getElementById('editEventLightbox').open();
+
+      $('#propEditor').val(propString);
+
+      function obj_diff(arr1, arr2){
+        var retArr = {};
+        arr1keys: for (key1 in arr1) {
+          for (key2 in arr2) {
+            // if the keys are the same
+            if (key2 === key1) {
+              // and the key has children
+              if (typeof arr1[key1] == "object"){
+                // search them too
+                var key1Store = key1;
+                var recursion = obj_diff(arr1[key1], arr2[key2]);
+                // if that returned anything
+                if (Object.keys(recursion).length > 0){
+                  // add them to the retval
+                  retArr[key1Store] = recursion;
+                }
+              }
+              continue arr1keys;
             }
-            else {
-              // else leave it false.
-              requiredProperties[prop.join('.')] = false;
-            }
+          }
+          retArr[key1] = arr1[key1];
+        }
+        return retArr;
+      }
+      /*
+      var requiredProperties = {};
+      // if the property is not in the eventbrite data
+      for (var key in idealEvent){
+        if (!propExists("eb.data.events[0].", key, idealEvent)){
+          // if the property has already been edited
+          if (propExists("selectedEvent.", prop)){
+            // set the value to the edited value
+            var propVal = eval("selectedEvent." + prop.join('.'))
+            requiredProperties[prop.join('.')] = propVal;
+          }
+          else {
+            // else leave it false.
+            requiredProperties[prop.join('.')] = false;
           }
         }
       }
@@ -105,7 +146,7 @@
 
       $('#propEditor').val(propString);
 
-      function propExists(obj, prop){
+      function propExists(obj, prop, ideal){
         var js = obj + prop.join('.');
         var propExists = false;
         try {
@@ -123,7 +164,7 @@
           propExists = false;
         }
         return propExists;
-      }
+      }*/
     },
     attached: function(){
       window.eventsPage = this;

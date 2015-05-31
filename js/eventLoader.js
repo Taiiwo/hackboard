@@ -43,27 +43,19 @@ function EventLoader(){
   this.logData = function(data) {
     for (var index in data.events){
       var event = data.events[index];
-      var obj= {};
-      //obj[event.id.toString()] = event;
+      for (var i in event) {
+        if (event[i] == null) {
+          delete event[i];
+        }
+      }
       var ref = this.db.child(event.id.toString());
       ref.update(event);
     }
   }
   this.editEvent = function(data){
-    var goodData = {};
-    if (this.isJson(data)){
-      data = JSON.parse(data);
-      for (var key in data){
-        var prop = data[key];
-        var newData = {};
-        for(var b in key.split('.')){
-          var newKey = key.split('.');
-
-        }
-      }
-      var ref = this.db.child(this.selectedEvent.id.toString());
-      ref.update(data);
-    }
+    var ref = this.db.child(this.selectedEvent.id.toString());
+    data = JSON.parse(data);
+    ref.update(data);
   }
   this.isJson = function(str) {
     try {
