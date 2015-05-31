@@ -31,12 +31,13 @@
     <div id="deck">
       <ul id="plugins"></ul>
     </div>
+
     <paper-dialog id="editEventLightbox">
       <h2>Edit Event Data</h2>
       <paper-textarea id="propEditor"></paper-textarea>
       <paper-button id="submitEventEdit">Edit Event</paper-button>
     </paper-dialog>
-    <paper-fab icon="add" on-tap="window.eventsPage.editEvent"></paper-fab>
+    <paper-fab icon="create" on-tap="editEvent"></paper-fab>
   </template>
 </dom-module>
 
@@ -164,26 +165,23 @@
         $("#results").empty();
         var searchResults = data.events
         for (var i=0; i < searchResults.length; i++) {
-          var eventId = searchResults[i].id
           if (searchResults[i].logo != undefined && searchResults[i].logo) {
             $("#results").append($("<li/>").append($("<search-result/>")
               .attr("name", searchResults[i].name.text)
               .attr("date", searchResults[i].start.local)
               .attr("logo", searchResults[i].logo.url)
-              .click(function() {
-                $("#search-results").slideUp()
-                document.querySelector("app-router").go("/" + eventId)
-              })
-            ))
+            ).click(function(e) {
+              $("#search-results").slideUp()
+              document.querySelector("app-router").go("/" + searchResults[i].id)
+            }))
           } else {
             $("#results").append($("<li/>").append($("<search-result/>")
               .attr("name", searchResults[i].name.text)
               .attr("date", searchResults[i].start.local)
-              .click(function() {
-                $("#search-results").slideUp()
-                document.querySelector("app-router").go("/" + eventId)
-              })
-            ))
+            ).click(function(e) {
+              $("#search-results").slideUp()
+              document.querySelector("app-router").go("/" + searchResults[i].id)
+            }))
           }
         }
       });
