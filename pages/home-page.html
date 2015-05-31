@@ -28,8 +28,7 @@
           </iron-pages>
         </div>
       </div>
-      <paper-toast id="badToast" role="alert"></paper-toast>
-      <paper-toast id="goodToast" role="alert"></paper-toast>
+      <paper-toast role="alert"></paper-toast>
     </div>
   </template>
 </dom-module>
@@ -59,7 +58,6 @@
       this.$.loginButton.blur()
       var self = this;
       $(document).on('login', function(){
-        self.goodToast("Login Successful!");
         // set auth global
         window.authenticatedUser = self.user;
         // set auth cookie
@@ -72,34 +70,16 @@
       this.$.firebaseLogin.createUser(this.email, this.password);
       var self = this;
       $(document).on('user-created', function(){
-        self.goodToast("Registration Successful!");
-        // go to login tab
-        document.querySelector('paper-tabs').selected = 0;
+        self.login()
       });
       this.$.signupButton.blur()
     },
     errorHandler: function(error) {
-      document.querySelector('#badToast').text = error.detail.message
-      document.querySelector('#badToast').show()
-    },
-    badToast: function(message){
-      document.querySelector('#badToast').text = message
-      document.querySelector('#badToast').show()
-    },
-    goodToast: function(message){
-      document.querySelector('#goodToast').text = message
-      document.querySelector('#goodToast').show()
+      document.querySelector('paper-toast').text = error.detail.message
+      document.querySelector('paper-toast').show()
     },
     attached: function(){
-      var auth = $.cookie("authenticatedUser");
-      if (this.isJson(auth)){
-        auth = JSON.parse(auth);
-        // we're already auth'd. Set the global and to to the events page
-        setTimeout( function (){ //  I just thought this was nicer to look at.
-          window.authenticatedUser = this.user;
-          document.querySelector('app-router').go(eventsPageUrl);
-        }, 500);
-      }
+
     },
     isJson: function(str) {
       try {
