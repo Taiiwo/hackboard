@@ -76,23 +76,57 @@ a {
   background-color: #9C27B0;
   font-family: 'Roboto'; }
   #event-header #search-box {
-    margin: 0 auto;
-    display: inline-block; }
-    #event-header #search-box .search-input {
-      width: 400px;
-      display: inline-block; }
-      #event-header #search-box .search-input paper-input-container .input-content.paper-input-container label {
-        color: #E3E3E3 !important; }
-      #event-header #search-box .search-input paper-input-container .unfocused-line.paper-input-container {
-        background: #E3E3E3 !important; }
-      #event-header #search-box .search-input paper-input-container .input-content.paper-input-container input {
-        color: #ffffff !important; }
-      #event-header #search-box .search-input paper-input-container .focused-line.paper-input-container {
-        background: #ffffff !important; }
+    width: 100%;
+    display: block;
+    text-align: center; }
+    #event-header #search-box #search {
+      display: inline-block;
+      margin-left: -38px; }
+      #event-header #search-box #search .search-input {
+        width: 700px;
+        display: inline-block;
+        text-align: left; }
+        #event-header #search-box #search .search-input paper-input-container .input-content.paper-input-container label {
+          color: #E3E3E3 !important; }
+        #event-header #search-box #search .search-input paper-input-container .unfocused-line.paper-input-container {
+          background: #E3E3E3 !important; }
+        #event-header #search-box #search .search-input paper-input-container .input-content.paper-input-container input {
+          color: #ffffff !important; }
+        #event-header #search-box #search .search-input paper-input-container .focused-line.paper-input-container {
+          background: #ffffff !important; }
     #event-header #search-box paper-icon-button {
       overflow: visible;
       margin-left: 3px;
+      color: white;
       line-height: 0; }
+
+#search-results {
+  width: 100%;
+  position: absolute;
+  top: 55px;
+  max-width: 700px;
+  display: none;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  height: 400px;
+  z-index: 10000; }
+  #search-results paper-material {
+    height: 100%;
+    background-color: #ffffff; }
+    #search-results paper-material #results {
+      height: 400px;
+      overflow-y: scroll; }
+      #search-results paper-material #results li {
+        list-style: none;
+        min-height: 65px;
+        padding: 20px;
+        display: block;
+        cursor: pointer;
+        background-color: #ffffff; }
+      #search-results paper-material #results li:hover {
+        background-color: #efefef; }
 
 #deck ul {
   height: 100%;

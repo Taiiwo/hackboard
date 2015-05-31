@@ -13,7 +13,7 @@ function EventLoader(){
       },
       function(data, status){
         self.data = data;
-        $(document).trigger("eventSearchComplete", this.data);
+        $(document).trigger("eventSearchComplete", self.data);
         self.logData(self.data);
       }
     );
@@ -26,7 +26,7 @@ function EventLoader(){
       },
       function(data, status){
         self.data = {events: [data]};
-        $(document).trigger("eventSearchComplete", this.data);
+        $(document).trigger("eventIDRecognised", self.data);
         self.logData(self.data);
       }
     ).fail(function() {
@@ -41,8 +41,8 @@ function EventLoader(){
     });
   }
   this.logData = function(data) {
-    for (var index in data.events){
-      var event = data.events[index];
+    for (var i = 0; i < data.events.length; i++) {
+      var event = data.events[i];
       var obj= {};
       //obj[event.id.toString()] = event;
       var ref = this.db.child(event.id.toString());

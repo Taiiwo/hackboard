@@ -15,6 +15,8 @@ a {
   text-decoration: none;
 }
 
+// Homepage
+
 #homepage {
   background-color: rgba(0, 0, 0, 0.5);
   height: 100%;
@@ -92,34 +94,76 @@ a {
   }
 }
 
+// Event Page
+
 #event-header {
   background-color: $main_color;
   font-family: 'Roboto';
   #search-box {
-    margin: 0 auto;
-    display: inline-block;
-    .search-input {
-      width: 400px;
+    width: 100%;
+    display: block;
+    text-align: center;
+    #search {
       display: inline-block;
-      paper-input-container {
-        .input-content.paper-input-container label {
-          color: #E3E3E3 !important;
-        }
-        .unfocused-line.paper-input-container {
-          background: #E3E3E3 !important;
-        }
-        .input-content.paper-input-container input {
-          color: #ffffff !important;
-        }
-        .focused-line.paper-input-container {
-          background: #ffffff !important;
+      margin-left: -38px;
+      .search-input {
+        width: 700px;
+        display: inline-block;
+        text-align: left;
+        paper-input-container {
+          .input-content.paper-input-container label {
+            color: #E3E3E3 !important;
+          }
+          .unfocused-line.paper-input-container {
+            background: #E3E3E3 !important;
+          }
+          .input-content.paper-input-container input {
+            color: #ffffff !important;
+          }
+          .focused-line.paper-input-container {
+            background: #ffffff !important;
+          }
         }
       }
     }
     paper-icon-button {
       overflow: visible;
       margin-left: 3px;
+      color: white;
       line-height: 0;
+    }
+  }
+}
+
+#search-results {
+  width: 100%;
+  position: absolute;
+  top: 55px;
+  max-width: 700px;
+  display: none;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  height: 400px;
+  z-index: 10000;
+  paper-material {
+    height: 100%;
+    background-color: #ffffff;
+    #results {
+      height: 400px;
+      overflow-y: scroll;
+      li {
+        list-style: none;
+        min-height: 65px;
+        padding: 20px;
+        display: block;
+        cursor: pointer;
+        background-color: #ffffff;
+      }
+      li:hover {
+        background-color: #efefef
+      }
     }
   }
 }
@@ -138,6 +182,8 @@ a {
     background-color: #ffffff;
   }
 }
+
+// 404 Page
 
 #error {
   height: 100%;

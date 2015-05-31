@@ -1,0 +1,44 @@
+<dom-module id="search-result">
+  <style>
+    #logo {
+      height: 65px;
+      float: left;
+    }
+
+    #name {
+      display: inline;
+      padding: 0px 10px;
+      font-size: 16pt;
+      font-family: "Roboto";
+      font-weight: 500;
+      color: black;
+      float: left;
+    }
+
+    #date {
+      display: block;
+      font-family: 'Roboto';
+      font-weight: 300;
+      padding: 0px 10px;
+      color: black;
+      float: left;
+    }
+  </style>
+
+  <template>
+    <img id="logo" src="{{logo}}"/>
+    <h1 id="name">{{name}}</h1>
+    <h3 id="date">{{date}}</h3>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "search-result",
+    properties: {
+      logo: String,
+      name: String,
+      date: String
+    }
+  })
+</script>

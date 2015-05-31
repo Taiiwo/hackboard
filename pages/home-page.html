@@ -35,7 +35,7 @@
 
 <script>
   // placeholder until we get an actual events url
-  var eventsPageUrl = "/17015133723";
+  var eventsPageUrl = "/home";
   Polymer({
     is: "home-page",
     properties: {
@@ -79,7 +79,13 @@
       document.querySelector('paper-toast').show()
     },
     attached: function(){
-
+      var auth = $.cookie("authenticatedUser");
+      if (this.isJson(auth)){
+        auth = JSON.parse(auth);
+        // we're already auth'd. Set the global and to to the events page
+        window.authenticatedUser = this.user;
+        document.querySelector('app-router').go(eventsPageUrl);
+      }
     },
     isJson: function(str) {
       try {
