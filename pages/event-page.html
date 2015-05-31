@@ -9,27 +9,13 @@
     <paper-toolbar id="event-header" class="tall">
       <h3>HackBoard</h3>
       <div id="search-box">
-        <div id="search">
-          <paper-input class="search-input" label="search for an event" no-label-float></paper-input>
-        </div>
+        <paper-input class="search-input" label="search for an event" no-label-float></paper-input>
         <paper-icon-button on-tap="searchEvent" icon="search" title="search"></paper-icon-button>
       </div>
     </paper-toolbar>
 
-    <div id="info">
-      <!-- page for when event isn't selected -->
-      <!-- featuring user settings (name, profile picture etc) and saved events -->
-    </div>
-
-    <div id="search-results">
-      <paper-material>
-        <ul id="results">
-        </ul>
-      </paper-material>
-    </div>
-
     <div id="deck">
-      <ul id="plugins"></ul>
+      <ul></ul>
     </div>
     <paper-dialog id="editEventLightbox">
       <h2>Edit Event Data</h2>
@@ -55,42 +41,56 @@
       // if the user presses enter in the searchbar, search their query
       var q = $('.search-input #input').val();
       if (q != "") {
+        $('#deck ul').css("opacity","0")
         eb.search(q);
-        $("#search-results").slideDown()
+        // unfocus the searchbar
+        $('.search-input #input').blur();
       }
     },
     editEvent: function() {
       // work out what eventbrite data we still need
-      var idealEvent = [
-        ["name", "text"],
-        ["name", "html"],
-        ["start"],
-        ["id"],
-        ["description", "text"],
-        ["description", "html"],
-        ["logo", "url"],
-        ["organiser", ],
-        ["venue", "latitude"],
-        ["venue", "longitude"],
-        ["venue", "name"],
-        ["twitterWidgetId"],
-        ["twitterHastags"],
-        ["githubHashtags"]
-      ];
+      var idealEvent = {
+        "name": {
+          "text": false,
+          "html": false
+        },
+        "start": false,
+        "end": false,
+        "id": false,
+        "description": {
+          "text": false,
+          "html": false
+        },
+        "logo": {"url": false},
+        "organiser": false,
+        "venue": {
+          "latitude":false,
+          "longitude": false,
+          "name": false
+        },
+        "twitterWidgetId": false,
+        "twitterHastags": false,
+        "githubHashtags": false
+      };
       var requiredProperties = {};
-      for (var a in idealEvent){
+      for (var key in idealEvent){
         var prop = idealEvent[a];
-        // if the property is not in the eventbrite data
-        if (!propExists("eb.data.events[0].", prop)){
-          // if the property has already been edited
-          if (propExists("selectedEvent.", prop)){
-            // set the value to the edited value
-            var propVal = eval("selectedEvent." + prop.join('.'))
-            requiredProperties[prop.join('.')] = propVal;
-          }
-          else {
-            // else leave it false.
-            requiredProperties[prop.join('.')] = false;
+        if (typeof prop == Object){
+
+        }
+        else {
+          // if the property is not in the eventbrite data
+          if (!propExists("eb.data.events[0].", prop)){
+            // if the property has already been edited
+            if (propExists("selectedEvent.", prop)){
+              // set the value to the edited value
+              var propVal = eval("selectedEvent." + prop.join('.'))
+              requiredProperties[prop.join('.')] = propVal;
+            }
+            else {
+              // else leave it false.
+              requiredProperties[prop.join('.')] = false;
+            }
           }
         }
       }
@@ -126,8 +126,8 @@
       }
     },
     attached: function(){
-      var selector = '#plugins';
       window.eventsPage = this;
+      var selector = '#deck ul';
       // load all the plugins
       pl = new PluginLoader(selector);
       // prep the plugin data
@@ -140,9 +140,7 @@
       // event search stuff
       // search for the event ID in the URL, if one exists
       var query = this.id
-      if (query == "home") {
-        console.log("home")
-      } else if (query.match(/^\d+$/)){
+      if (query.match(/^\d+$/)){
         eb.searchID(query);
       } else {
         document.querySelector('app-router').go('/404')
@@ -156,41 +154,8 @@
         }
       });
 
-      $(document).on('eventIDRecognised', function(e, data) {
-        eb.selectEvent(0)
-      });
-
       $(document).on('eventSearchComplete', function(e, data) {
-        $("#results").empty();
-        var searchResults = data.events
-        for (var i=0; i < searchResults.length; i++) {
-          var eventId = searchResults[i].id
-          if (searchResults[i].logo != undefined && searchResults[i].logo) {
-            $("#results").append($("<li/>").append($("<search-result/>")
-              .attr("name", searchResults[i].name.text)
-              .attr("date", searchResults[i].start.local)
-              .attr("logo", searchResults[i].logo.url)
-              .click(function() {
-                $("#search-results").slideUp()
-                document.querySelector("app-router").go("/" + eventId)
-              })
-            ))
-          } else {
-            $("#results").append($("<li/>").append($("<search-result/>")
-              .attr("name", searchResults[i].name.text)
-              .attr("date", searchResults[i].start.local)
-              .click(function() {
-                $("#search-results").slideUp()
-                document.querySelector("app-router").go("/" + eventId)
-              })
-            ))
-          }
-        }
-      });
-
-      $("search-result").click(function(sender) {
-        $("#search-results").slideUp()
-        document.querySelector("app-router").go("/" + sender.attr("id"))
+        eb.selectEvent(0);
       })
 
       $(document).on('eventSelected', function(e, data, status){

@@ -13,7 +13,7 @@ function EventLoader(){
       },
       function(data, status){
         self.data = data;
-        $(document).trigger("eventSearchComplete", self.data);
+        $(document).trigger("eventSearchComplete", this.data);
         self.logData(self.data);
       }
     );
@@ -26,7 +26,7 @@ function EventLoader(){
       },
       function(data, status){
         self.data = {events: [data]};
-        $(document).trigger("eventIDRecognised", self.data);
+        $(document).trigger("eventSearchComplete", this.data);
         self.logData(self.data);
       }
     ).fail(function() {
@@ -41,8 +41,8 @@ function EventLoader(){
     });
   }
   this.logData = function(data) {
-    for (var i = 0; i < data.events.length; i++) {
-      var event = data.events[i];
+    for (var index in data.events){
+      var event = data.events[index];
       var obj= {};
       //obj[event.id.toString()] = event;
       var ref = this.db.child(event.id.toString());
@@ -50,9 +50,19 @@ function EventLoader(){
     }
   }
   this.editEvent = function(data){
-    var ref = this.db.child(this.selectedEvent.id.toString());
+    var goodData = {};
     if (this.isJson(data)){
-      ref.update(JSON.parse(data));
+      data = JSON.parse(data);
+      for (var key in data){
+        var prop = data[key];
+        var newData = {};
+        for(var b in key.split('.')){
+          var newKey = key.split('.');
+
+        }
+      }
+      var ref = this.db.child(this.selectedEvent.id.toString());
+      ref.update(data);
     }
   }
   this.isJson = function(str) {
