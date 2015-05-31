@@ -11,7 +11,7 @@
   {
     "name":"logo-plugin",
     "location":"plugins/logoPlugin.html",
-    "x": 1,
+    "x": 2,
     "y": 1,
     "deps":[
       "selectedEvent.logo.url != undefined"
@@ -44,7 +44,7 @@
     "x": 1,
     "y": 1,
     "deps":[
-      "selectedEvent.twitterHashtag != undefined"
+      "selectedEvent.twitterWidgetId != undefined"
     ]
   }
 ]
