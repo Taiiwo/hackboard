@@ -49,4 +49,18 @@ function EventLoader(){
       ref.update(event);
     }
   }
+  this.editEvent = function(data){
+    var ref = this.db.child(this.selectedEvent.id.toString());
+    if (this.isJson(data)){
+      ref.update(JSON.parse(data));
+    }
+  }
+  this.isJson = function(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+  }
 }
