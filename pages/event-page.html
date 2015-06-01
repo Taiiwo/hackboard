@@ -17,12 +17,13 @@
     <div id="deck">
       <ul></ul>
     </div>
+
     <paper-dialog id="editEventLightbox">
       <h2>Edit Event Data</h2>
       <paper-textarea id="propEditor"></paper-textarea>
       <paper-button id="submitEventEdit">Edit Event</paper-button>
     </paper-dialog>
-    <paper-fab icon="add" on-tap="window.eventsPage.editEvent"></paper-fab>
+    <paper-fab icon="create" on-tap="editEvent"></paper-fab>
   </template>
 </dom-module>
 
@@ -196,7 +197,33 @@
       });
 
       $(document).on('eventSearchComplete', function(e, data) {
-        eb.selectEvent(0);
+        $("#results").empty();
+        var searchResults = data.events
+        for (var i=0; i < searchResults.length; i++) {
+          if (searchResults[i].logo != undefined && searchResults[i].logo) {
+            $("#results").append($("<li/>").append($("<search-result/>")
+              .attr("name", searchResults[i].name.text)
+              .attr("date", searchResults[i].start.local)
+              .attr("logo", searchResults[i].logo.url)
+            ).click(function(e) {
+              $("#search-results").slideUp()
+              document.querySelector("app-router").go("/" + searchResults[i].id)
+            }))
+          } else {
+            $("#results").append($("<li/>").append($("<search-result/>")
+              .attr("name", searchResults[i].name.text)
+              .attr("date", searchResults[i].start.local)
+            ).click(function(e) {
+              $("#search-results").slideUp()
+              document.querySelector("app-router").go("/" + searchResults[i].id)
+            }))
+          }
+        }
+      });
+
+      $("search-result").click(function(sender) {
+        $("#search-results").slideUp()
+        document.querySelector("app-router").go("/" + sender.attr("id"))
       })
 
       $(document).on('eventSelected', function(e, data, status){

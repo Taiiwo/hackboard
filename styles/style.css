@@ -128,6 +128,13 @@ a {
       #search-results paper-material #results li:hover {
         background-color: #efefef; }
 
+paper-fab {
+  position: absolute;
+  background-color: #2196F3 !important;
+  left: auto;
+  right: 20px;
+  bottom: 20px; }
+
 #deck ul {
   height: 100%;
   opacity: 0; }

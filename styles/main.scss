@@ -168,6 +168,14 @@ a {
   }
 }
 
+paper-fab {
+  position: absolute;
+  background-color: $accent_color !important; 
+  left: auto;
+  right: 20px;
+  bottom: 20px;
+}
+
 #deck ul{
   height: 100%;
   opacity: 0;
