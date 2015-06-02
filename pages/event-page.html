@@ -66,26 +66,25 @@
       // work out what eventbrite data we still need
       var idealEvent = {
         "name": {
-          "text": null,
-          "html": null
+          "text": selectedEvent.name.text || null,
+          "html": selectedEvent.name.html || null
         },
-        "start": null,
-        "end": null,
-        "id": null,
+        "start": selectedEvent.start || null,
+        "end": selectedEvent.end || null,
         "description": {
-          "text": null,
-          "html": null
+          "text": selectedEvent.description.text || null,
+          "html": selectedEvent.description.html || null
         },
-        "logo": {"url": null},
-        "organizer": null,
+        "logo": {"url": selectedEvent.logo.url || null},
+        "organizer": selectedEvent.organizer || null,
         "venue": {
-          "latitude":null,
-          "longitude": null,
-          "name": null
+          "latitude":selectedEvent.venue.latitude || null,
+          "longitude": selectedEvent.venue.longitude || null,
+          "name": selectedEvent.venue.name || null
         },
-        "twitterWidgetId": null,
-        "twitterHastags": null,
-        "githubHashtags": null
+        "twitterWidgetId": selectedEvent.twitterWidgetId || null,
+        "twitterHastags": selectedEvent.twitterHastags || null,
+        "githubHashtags": selectedEvent.githubHashtags || null
       };
       var eventIndex;
       for ( var event in eb.data.events){
