@@ -46,5 +46,14 @@
     "deps":[
       "selectedEvent.twitterWidgetId != undefined"
     ]
+  },
+  {
+    "name":"github-repos",
+    "location":"plugins/githubRepos.html",
+    "x": 1,
+    "y": 1,
+    "deps":[
+      "selectedEvent.githubHashtags != undefined"
+    ]
   }
 ]
