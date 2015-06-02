@@ -169,25 +169,23 @@
       $(document).on('eventSearchComplete', function(e, data) {
         $("#results").empty();
         var searchResults = data.events
-        for (var i=0; i < searchResults.length; i++) {
+        for (var i in searchResults) {
+          var searchResult = $("<search-result/>")
+            .attr("name", searchResults[i].name.text)
+            .attr("date", searchResults[i].start.local);
           if (searchResults[i].logo != undefined && searchResults[i].logo) {
-            $("#results").append($("<li/>").append($("<search-result/>")
-              .attr("name", searchResults[i].name.text)
-              .attr("date", searchResults[i].start.local)
-              .attr("logo", searchResults[i].logo.url)
-            ).click(function(e) {
-              $("#search-results").slideUp()
-              document.querySelector("app-router").go("/" + searchResults[i].id)
-            }))
-          } else {
-            $("#results").append($("<li/>").append($("<search-result/>")
-              .attr("name", searchResults[i].name.text)
-              .attr("date", searchResults[i].start.local)
-            ).click(function(e) {
-              $("#search-results").slideUp()
-              document.querySelector("app-router").go("/" + searchResults[i].id)
-            }))
+            searchResult.attr('logo', searchResults[i].logo.url)
           }
+          $("#results")
+            .append(
+              $("<li/>")
+                .attr('id', searchResults[i].id)
+                .append(searchResult)
+                .click(function(e) {
+                  $("#search-results").slideUp()
+                  document.querySelector("app-router").go("/" + e.currentTarget.id)
+                })
+            )
         }
       });
 
