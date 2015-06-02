@@ -13,7 +13,7 @@ function EventLoader(){
       },
       function(data, status){
         self.data = data;
-        $(document).trigger("eventSearchComplete", this.data);
+        $(document).trigger("eventSearchComplete", self.data);
         self.logData(self.data);
       }
     );
@@ -26,7 +26,7 @@ function EventLoader(){
       },
       function(data, status){
         self.data = {events: [data]};
-        $(document).trigger("eventSearchComplete", this.data);
+        $(document).trigger("eventIDRecognised", self.data);
         self.logData(self.data);
       }
     ).fail(function() {

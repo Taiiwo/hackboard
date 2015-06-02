@@ -9,13 +9,26 @@
     <paper-toolbar id="event-header" class="tall">
       <h3>HackBoard</h3>
       <div id="search-box">
-        <paper-input class="search-input" label="search for an event" no-label-float></paper-input>
+        <div id="search">
+          <paper-input class="search-input" label="search for an event" no-label-float></paper-input>
+        </div>
         <paper-icon-button on-tap="searchEvent" icon="search" title="search"></paper-icon-button>
       </div>
     </paper-toolbar>
+    <div id="info">
+      <!-- page for when event isn't selected -->
+      <!-- featuring user settings (name, profile picture etc) and saved events -->
+    </div>
+
+    <div id="search-results">
+      <paper-material>
+        <ul id="results">
+        </ul>
+      </paper-material>
+    </div>
 
     <div id="deck">
-      <ul></ul>
+      <ul id="plugins"></ul>
     </div>
 
     <paper-dialog id="editEventLightbox">
@@ -40,12 +53,13 @@
     },
     searchEvent: function() {
       // if the user presses enter in the searchbar, search their query
-      var q = $('.search-input #input').val();
+      var q = $('#search-box #search .search-input').val();
       if (q != "") {
         $('#deck ul').css("opacity","0")
         eb.search(q);
+        $("#search-results").slideDown()
         // unfocus the searchbar
-        $('.search-input #input').blur();
+        $('#search-box #search .search-input').blur();
       }
     },
     editEvent: function() {
@@ -119,53 +133,6 @@
         }
         return retArr;
       }
-      /*
-      var requiredProperties = {};
-      // if the property is not in the eventbrite data
-      for (var key in idealEvent){
-        if (!propExists("eb.data.events[0].", key, idealEvent)){
-          // if the property has already been edited
-          if (propExists("selectedEvent.", prop)){
-            // set the value to the edited value
-            var propVal = eval("selectedEvent." + prop.join('.'))
-            requiredProperties[prop.join('.')] = propVal;
-          }
-          else {
-            // else leave it false.
-            requiredProperties[prop.join('.')] = false;
-          }
-        }
-      }
-      // turn that into json
-      var propString = JSON.stringify(requiredProperties, null, 4);
-      // set button editEvent
-      $('#submitEventEdit').click(function(){
-        eb.editEvent($('#propEditor').val())
-      });
-      // display it in the lightbox
-      document.getElementById('editEventLightbox').open();
-
-      $('#propEditor').val(propString);
-
-      function propExists(obj, prop, ideal){
-        var js = obj + prop.join('.');
-        var propExists = false;
-        try {
-          if (eval(js) != undefined){
-            // already got this info.
-            propExists = true;
-          }
-          else {
-            // we need this info
-            propExists = false;
-          }
-        }
-        catch (e){
-          // we need this info
-          propExists = false;
-        }
-        return propExists;
-      }*/
     },
     attached: function(){
       window.eventsPage = this;
@@ -184,13 +151,16 @@
       var query = this.id
       if (query.match(/^\d+$/)){
         eb.searchID(query);
+        $(document).on('eventIDRecognised', function(){
+          eb.selectEvent(0);
+        })
       } else {
         document.querySelector('app-router').go('/404')
       }
 
       var self = this;
       // if the user presses enter in the searchbar, search their query
-      $('.search-input #input').keyup(function (e) {
+      $('#search-box #search .search-input').keyup(function (e) {
         if (e.keyCode == 13) {
           self.searchEvent()
         }
