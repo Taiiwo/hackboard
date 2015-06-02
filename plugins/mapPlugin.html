@@ -19,7 +19,7 @@
   document.body.appendChild(script)
 
   function initialize() {
-    var latLong = new google.maps.LatLng(selectedEvent.venue.latitude, selectedEvent.venue.longitude)
+    var latLong = google.maps.LatLng(selectedEvent.venue.latitude, selectedEvent.venue.longitude)
     var mapOptions = {
       zoom: 15,
       center: latLong

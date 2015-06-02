@@ -55,5 +55,14 @@
     "deps":[
       "selectedEvent.githubHashtags != undefined"
     ]
+  },
+  {
+    "name":"github-lang",
+    "location":"plugins/githubLang.html",
+    "x": 1,
+    "y": 1,
+    "deps":[
+      "selectedEvent.githubHashtags != undefined"
+    ]
   }
 ]
