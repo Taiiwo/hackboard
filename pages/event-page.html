@@ -66,26 +66,26 @@
       // work out what eventbrite data we still need
       var idealEvent = {
         "name": {
-          "text": false,
-          "html": false
+          "text": null,
+          "html": null
         },
-        "start": false,
-        "end": false,
-        "id": false,
+        "start": null,
+        "end": null,
+        "id": null,
         "description": {
-          "text": false,
-          "html": false
+          "text": null,
+          "html": null
         },
-        "logo": {"url": false},
-        "organizer": false,
+        "logo": {"url": null},
+        "organizer": null,
         "venue": {
-          "latitude":false,
-          "longitude": false,
-          "name": false
+          "latitude":null,
+          "longitude": null,
+          "name": null
         },
-        "twitterWidgetId": false,
-        "twitterHastags": false,
-        "githubHashtags": false
+        "twitterWidgetId": null,
+        "twitterHastags": null,
+        "githubHashtags": null
       };
       var eventIndex;
       for ( var event in eb.data.events){
@@ -154,7 +154,7 @@
         $(document).on('eventIDRecognised', function(){
           eb.selectEvent(0);
         })
-      } else {
+      } else if (query != "home") {
         document.querySelector('app-router').go('/404')
       }
 
