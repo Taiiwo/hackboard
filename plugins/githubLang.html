@@ -1,17 +1,22 @@
-<link rel="import" href="../components/google-chart/google-chart.html">
 <dom-module id="github-lang">
+  <style>
+
+  </style>
   <template>
     <google-chart
       type='pie'
       options='{"title": "Distribution of days in 2001H1"}'
       cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"}]'
-      rows='[["Jan", 31],["Feb", 28],["Mar", 31],["Apr", 30],["May", 31],["Jun", 30]]'>
+      rows='[ ["Jan", 31],["Feb", 28],["Mar", 31],["Apr", 30],["May", 31],["Jun", 30]]'>
     </google-chart>
-    <h1>hello?</h1>
   </template>
 </dom-module>
 <script>
   Polymer({
-    is: 'github-lang'
+    is: 'github-lang',
+    ready: function() {
+      document.querySelector("google-chart").drawChart()
+      console.log()
+    }
   });
 </script>
