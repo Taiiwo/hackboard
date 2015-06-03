@@ -104,9 +104,9 @@
         }
       });
       // display it in the lightbox
-      document.getElementById('editEventLightbox').open();
-
       $('#propEditor').val(propString);
+      this.$.editEventLightbox.fit()
+      document.getElementById('editEventLightbox').open();
 
       function obj_diff(arr1, arr2){
         var retArr = {};
