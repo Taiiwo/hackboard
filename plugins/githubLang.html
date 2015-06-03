@@ -1,22 +1,70 @@
+<link rel="import" href="../components/google-chart/google-chart.html">
 <dom-module id="github-lang">
   <style>
-
+    google-chart{
+      width: 290px;
+      height: 250px;
+    }
   </style>
   <template>
-    <google-chart
-      type='pie'
-      options='{"title": "Distribution of days in 2001H1"}'
-      cols='[{"label": "Month", "type": "string"},{"label": "Days", "type": "number"}]'
-      rows='[ ["Jan", 31],["Feb", 28],["Mar", 31],["Apr", 30],["May", 31],["Jun", 30]]'>
-    </google-chart>
+    <plugin-template title="GitHub Languages">
+      <google-chart
+        type='pie'>
+      </google-chart>
+    </plugin-template>
   </template>
 </dom-module>
 <script>
   Polymer({
     is: 'github-lang',
     ready: function() {
-      document.querySelector("google-chart").drawChart()
-      console.log()
+      var c = document.querySelector("google-chart");
+      var cj = $(c);
+      var rows = [];
+      var keys = {};
+      githubApi.searchRepo(selectedEvent.githubHashtags, function(repos){
+        for (var i in repos.items){
+          var repo = repos.items[i];
+          if (keys[repo.language] > 0){
+            keys[repo.language]++
+          }
+          else {
+            keys[repo.language] = 1
+          }
+        }
+        for (var key in keys){
+          var key1 = key;
+          if (key == 'null'){
+            key1 = "Unspecified";
+          }
+          rows.push([key1, keys[key]]);
+        }
+        c.options = {
+            "chartArea": {
+              "left": 0,
+              "right": 0,
+              "width": "100%",
+              "height": "90%",
+              "top": 10,
+              "bottom": 10},
+            "legend": "none",
+            "pieHole": 0.333,
+            "pieSliceText": "label",
+            "backgroundColor": "white"
+        };
+        c.cols = [
+          {
+            "label": "Language",
+            "type": "string"
+          },
+          {
+            "label": "Quantity",
+            "type": "number"
+          }
+        ];
+        c.rows = rows;
+        c.drawChart();
+      });
     }
   });
 </script>
