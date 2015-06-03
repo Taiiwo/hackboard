@@ -65,35 +65,29 @@
     editEvent: function() {
       // work out what eventbrite data we still need
       var idealEvent = {
-        "name": {
-          "text": prepProp('selectedEvent.name.text'),
-          "html": prepProp('selectedEvent.name.html')
+        "name": selectedEvent.name || {
+          "text": null,
+          "html": null
         },
-        "start": prepProp('selectedEvent.start'),
-        "end": prepProp('selectedEvent.end'),
-        "description": {
-          "text": prepProp('selectedEvent.description.text'),
-          "html": prepProp('selectedEvent.description.html')
+        "start": selectedEvent.start || null,
+        "end": selectedEvent.end || null,
+        "description": selectedEvent.description || {
+          "text": null,
+          "html": null
         },
-        "logo": {"url": prepProp('selectedEvent.logo.url')},
-        "organizer": prepProp('selectedEvent.organizer'),
-        "venue": {
-          "latitude":prepProp('selectedEvent.venue.latitude'),
-          "longitude": prepProp('selectedEvent.venue.longitude'),
-          "name": prepProp('selectedEvent.venue.name')
+        "logo": selectedEvent.logo || {
+          "url": null
         },
-        "twitterWidgetId": prepProp('selectedEvent.twitterWidgetId'),
-        "twitterHastags": prepProp('selectedEvent.twitterHastags'),
-        "githubHashtags": prepProp('selectedEvent.githubHashtags')
+        "organizer": selectedEvent.organizer || null,
+        "venue": selectedEvent.venue || {
+          "latitude": null,
+          "longitude": null,
+          "name": null
+        },
+        "twitterWidgetId": selectedEvent.twitterWidgetId || null,
+        "twitterHastags": selectedEvent.twitterHastags || null,
+        "githubHashtags": selectedEvent.githubHashtags || null
       };
-      function prepProp(prop){
-        try {
-          return eval(prop);
-        }
-        catch(e){
-          return null;
-        }
-      }
       var eventIndex;
       for ( var event in eb.data.events){
         if (eb.data.events[event].id == selectedEvent.id) {
